@@ -13,13 +13,13 @@ interface Props {
 const { items, title, eyebrow, idPrefix = "faq" } = Astro.props;
 ---
 
-<section class="section">
+<section class="section-tight">
   <div class="container-brand max-w-3xl">
     {
       (title || eyebrow) && (
-        <div class="mb-10">
-          {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
-          {title && <h2 class="font-display text-3xl sm:text-4xl">{title}</h2>}
+        <div class="mb-6">
+          {eyebrow && <p class="eyebrow mb-2">{eyebrow}</p>}
+          {title && <h2 class="font-display text-2xl sm:text-3xl">{title}</h2>}
         </div>
       )
     }
