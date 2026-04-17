@@ -35,6 +35,7 @@ export default defineConfig({
           "heart-handshake",
           "globe",
           "file-signature",
+          "file-pen",
           "scroll-text",
           "star",
           "menu",
