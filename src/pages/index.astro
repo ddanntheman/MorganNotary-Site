@@ -7,6 +7,7 @@ import Hero from "@components/sections/Hero.astro";
 import ServicesGrid from "@components/sections/ServicesGrid.astro";
 import TestimonialsStrip from "@components/sections/TestimonialsStrip.astro";
 import Card from "@components/ui/Card.astro";
+import SectionHeader from "@components/ui/SectionHeader.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { faqJsonLd } from "@lib/schema";
 import { buildMeta } from "@lib/seo";
@@ -67,12 +68,14 @@ const jsonLd = [faqJsonLd(faqItems)];
   </section>
 
   {/* Warm "meet Morgan" intro. Photos are Unsplash placeholders;
-      swap with locally-shot Richmond + portrait photography when ready. */}
-  <section class="section">
+      swap with locally-shot Richmond + portrait photography when ready.
+      Uses section-tight so the gap below the credential strip stays
+      cozy, not cavernous. */}
+  <section class="section-tight">
     <div class="container-brand grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
       <div class="relative">
         <div class="grid grid-cols-6 grid-rows-6 gap-3 aspect-[4/5] max-w-md mx-auto lg:mx-0">
-          <figure class="col-span-4 row-span-4 overflow-hidden rounded-[20px] border border-[color:var(--color-border-warm)] shadow-[0_20px_50px_rgba(28,26,24,0.10)]">
+          <figure class="col-span-4 row-span-4 overflow-hidden rounded-[20px] border border-[color:var(--color-ice-deep)] shadow-[0_20px_50px_rgba(20,26,36,0.12)]">
             <img
               src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80"
               alt="Warm notary-signing moment at a kitchen table"
@@ -81,7 +84,7 @@ const jsonLd = [faqJsonLd(faqItems)];
               class="h-full w-full object-cover"
             />
           </figure>
-          <figure class="col-span-3 row-span-3 col-start-4 row-start-4 overflow-hidden rounded-[16px] border border-[color:var(--color-border-warm)] shadow-[0_12px_32px_rgba(28,26,24,0.08)] bg-[color:var(--color-cream)]">
+          <figure class="col-span-3 row-span-3 col-start-4 row-start-4 overflow-hidden rounded-[16px] border border-[color:var(--color-ice-deep)] shadow-[0_12px_32px_rgba(20,26,36,0.10)] bg-[color:var(--color-ice)]">
             <img
               src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=700&q=80"
               alt="Richmond, Virginia row houses on a quiet tree-lined street"
@@ -90,7 +93,7 @@ const jsonLd = [faqJsonLd(faqItems)];
               class="h-full w-full object-cover"
             />
           </figure>
-          <figure class="col-span-2 row-span-2 col-start-1 row-start-5 overflow-hidden rounded-[14px] border border-[color:var(--color-border-warm)] bg-[color:var(--color-warm-white)]">
+          <figure class="col-span-2 row-span-2 col-start-1 row-start-5 overflow-hidden rounded-[14px] border border-[color:var(--color-ice-deep)] bg-[color:var(--color-warm-white)]">
             <img
               src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=500&q=80"
               alt="Fountain pen resting on signed paperwork"
@@ -106,8 +109,10 @@ const jsonLd = [faqJsonLd(faqItems)];
       </div>
 
       <div class="space-y-5">
-        <p class="eyebrow eyebrow-terracotta">Meet Morgan</p>
-        <h2 class="font-display text-3xl sm:text-4xl leading-tight">
+        <p class="font-[family-name:var(--font-hand)] text-3xl sm:text-4xl leading-none text-[color:var(--color-plum)]">
+          Meet Morgan
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight">
           A neighbor who happens to be a notary.
         </h2>
         <p class="text-[color:var(--color-text-secondary)] text-lg leading-relaxed max-w-xl">
@@ -139,10 +144,11 @@ const jsonLd = [faqJsonLd(faqItems)];
   <section class="section bg-[color:var(--color-warm-gray)]">
     <div class="container-brand grid lg:grid-cols-2 gap-10 items-start">
       <div>
-        <p class="eyebrow mb-3">Why Morgan</p>
-        <h2 class="font-display text-3xl sm:text-4xl mb-6">
-          Why I built this business, and what it means for you.
-        </h2>
+        <SectionHeader eyebrow="Why Morgan" class="mb-6 !max-w-none">
+          <h2 class="font-display text-3xl sm:text-4xl">
+            Why I built this business, and what it means for you.
+          </h2>
+        </SectionHeader>
         <div class="prose-brand">
           <p>
             Morgan Danner, Notary isn't a side hustle. I got my Virginia

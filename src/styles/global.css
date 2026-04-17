@@ -7,31 +7,37 @@
    then this file. Not the other way around.
 -------------------------------------------------------------------*/
 @theme {
-  /* Colors */
-  --color-plum: #5b2d82;
-  --color-plum-light: #f0e8f8;
-  --color-plum-mid: #8b4dbf;
+  /* Colors — "winter" palette. Cool undertones: deep navy primary,
+     ice-blue accents, emerald secondary. Gold kept for specific
+     warm-accent moments (People's Rate) but de-emphasized globally.
+     Token names retained (plum, neon) to avoid site-wide renames;
+     values now map to cool tones instead. */
+  --color-plum: #1e3a5f; /* deep winter navy, primary */
+  --color-plum-light: #e4ecf5; /* ice tint, light surfaces */
+  --color-plum-mid: #2c547d; /* navy hover */
   --color-emerald: #1b6b4a;
   --color-emerald-light: #e8f5ee;
-  --color-navy: #243b6e;
+  --color-navy: #1a3558; /* deeper navy, partner badges */
   --color-navy-light: #e8edf6;
   --color-gold: #c17d2a;
   --color-gold-light: #fdf3e3;
   --color-amber-dark: #8a5a1c;
   --color-amber-cream: #fbf3e4;
-  --color-terracotta: #b8552d;
-  --color-terracotta-light: #f5e4dc;
+  --color-terracotta: #8a4a6e; /* shifted cooler, muted plum-rose */
+  --color-terracotta-light: #efe4eb;
   --color-cream: #f5ebd6;
   --color-cream-deep: #ecddbe;
-  --color-neon: #c8f53a;
-  --color-charcoal: #2a2825;
+  --color-neon: #8cc9e8; /* ice blue, replaces chartreuse accent */
+  --color-charcoal: #1f2a3a; /* cool charcoal (slight blue cast) */
   --color-warm-white: #faf9f6;
   --color-warm-gray: #f5f3ef;
+  --color-ice: #eef3fa; /* new: light ice surface (footer) */
+  --color-ice-deep: #d8e2ef; /* new: cool border / ice shadow */
   --color-border: #e2ddd8;
   --color-border-warm: #d9cfc1;
-  --color-text-primary: #1c1a18;
-  --color-text-secondary: #6b6560;
-  --color-text-tertiary: #9e9890;
+  --color-text-primary: #141a24; /* cool-shifted near-black */
+  --color-text-secondary: #58616f;
+  --color-text-tertiary: #8f96a1;
   --color-teal: #0f6e7a;
   --color-red: #a32d2d;
   --color-red-light: #fdeeee;
@@ -63,7 +69,7 @@
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
   --shadow-md: 0 4px 12px rgb(0 0 0 / 0.06);
   --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.08);
-  --shadow-plum: 0 12px 32px rgb(91 45 130 / 0.18);
+  --shadow-plum: 0 12px 32px rgb(30 58 95 / 0.22);
 
   /* Layout */
   --container-max: 1200px;
@@ -161,9 +167,9 @@
   }
   .eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     /* Darker than tertiary so small mono reads AA on warm surfaces. */
     color: var(--color-text-secondary);
@@ -173,6 +179,19 @@
   }
   .eyebrow-terracotta {
     color: var(--color-terracotta);
+  }
+  /* Accent eyebrow: small navy dot prefix so section tops carry a
+     visual beat, not just a mono label. Used via SectionHeader. */
+  .eyebrow-accent {
+    color: var(--color-plum);
+  }
+  .eyebrow-accent-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-plum);
+    flex-shrink: 0;
   }
 
   /* Handwritten accent, used sparingly (signature, thank-you sign-off).
@@ -432,13 +451,17 @@
     opacity: 0.5;
   }
 }
-.pulse-dot {
+.pulse-dot,
+.dot-static {
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  animation: pulse-dot 2s ease-in-out infinite;
+  flex-shrink: 0;
   /* Default fallback only, CredentialRow sets the actual background
      per variant so the color always has enough contrast with its surface. */
   background: var(--color-emerald);
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
 }
