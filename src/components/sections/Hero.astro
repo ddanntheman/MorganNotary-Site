@@ -11,15 +11,23 @@ interface Props {
   ctaPrimary?: { label: string; href: string };
   ctaSecondary?: { label: string; href: string };
   variant?: "dark" | "light";
+  /** Optional Richmond photo for the right-hand aside. Falls back to
+   *  the gradient card when omitted. */
+  image?: {
+    src: string;
+    alt: string;
+    caption?: string;
+    credit?: string;
+  };
 }
 const {
-  eyebrow = "Richmond, VA · Licensed · Insured · NNA Member",
   h1,
   subhead,
   ctaPrimary,
   ctaSecondary,
   variant = "dark",
-} = Astro.props;
+  image,
+} = Astro.props as Props;
 
 const isDark = variant === "dark";
 ---
@@ -27,18 +35,19 @@ const isDark = variant === "dark";
 <section
   class:list={[
     "relative overflow-hidden",
-    isDark ? "bg-[color:var(--color-charcoal)]" : "bg-[color:var(--color-warm-white)]",
+    isDark
+      ? "bg-[color:var(--color-charcoal)]"
+      : "bg-[color:var(--color-warm-white)] grain",
   ]}
 >
   <div class="container-brand section grid lg:grid-cols-[1.2fr_1fr] gap-10 items-center">
     <div class="space-y-6 lg:max-w-2xl">
-      <CredentialRow />
+      <CredentialRow variant={variant} />
       <h1
         class:list={[
           "font-display text-4xl sm:text-5xl lg:text-6xl",
           isDark ? "text-white" : "text-[color:var(--color-text-primary)]",
         ]}
-        style="font-weight: 500; letter-spacing: -0.01em; line-height: 1.05;"
       >
         {h1}
       </h1>
@@ -63,17 +72,50 @@ const isDark = variant === "dark";
 
     <div class="hidden lg:block">
       <slot name="aside">
-        <div class="aspect-[4/5] rounded-[20px] border border-white/10 bg-gradient-to-br from-[color:var(--color-plum)] to-[color:var(--color-navy)] p-6 relative overflow-hidden">
-          <div class="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_30%_20%,white,transparent_50%)]"></div>
-          <div class="relative h-full flex flex-col justify-end">
-            <p class="font-display text-white text-3xl leading-tight">
-              Mobile. Remote. Apostille.
-            </p>
-            <p class="mt-2 eyebrow text-[color:var(--color-neon)]">
-              Evenings · Weekends · Same-day
-            </p>
-          </div>
-        </div>
+        {
+          image ? (
+            <figure class="relative aspect-[4/5] rounded-[20px] overflow-hidden border border-[color:var(--color-border-warm)] shadow-[0_20px_50px_rgba(28,26,24,0.12)]">
+              <img
+                src={image.src}
+                alt={image.alt}
+                width="800"
+                height="1000"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[rgba(28,26,24,0.55)] via-transparent to-transparent"
+                aria-hidden="true"
+              />
+              {(image.caption || image.credit) && (
+                <figcaption class="absolute inset-x-0 bottom-0 p-5 text-white">
+                  {image.caption && (
+                    <p class="font-display text-2xl leading-tight drop-shadow-sm">
+                      {image.caption}
+                    </p>
+                  )}
+                  {image.credit && (
+                    <p class="mt-1 eyebrow text-white/75">{image.credit}</p>
+                  )}
+                </figcaption>
+              )}
+            </figure>
+          ) : (
+            <div class="aspect-[4/5] rounded-[20px] border border-white/10 bg-gradient-to-br from-[color:var(--color-plum)] to-[color:var(--color-terracotta)] p-6 relative overflow-hidden">
+              <div class="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_30%_20%,white,transparent_50%)]" />
+              <div class="relative h-full flex flex-col justify-end">
+                <p class="font-display text-white text-3xl leading-tight">
+                  Mobile. Remote. Apostille.
+                </p>
+                <p class="mt-2 eyebrow text-[color:var(--color-cream)]">
+                  Evenings · Weekends · Same-day
+                </p>
+              </div>
+            </div>
+          )
+        }
       </slot>
     </div>
   </div>

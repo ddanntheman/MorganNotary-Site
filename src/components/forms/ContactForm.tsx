@@ -137,13 +137,13 @@ export default function ContactForm({
     }
 
     if (result.data.botField && result.data.botField.length > 0) {
-      // honeypot — silently "succeed"
+      // honeypot, silently "succeed"
       setStatus("success");
       return;
     }
 
     if (!formspreeId) {
-      // Dev fallback — fake success so the form is usable before integration.
+      // Dev fallback, fake success so the form is usable before integration.
       setTimeout(() => setStatus("success"), 400);
       return;
     }
@@ -164,7 +164,7 @@ export default function ContactForm({
     return (
       <div className="card card-dark">
         <h3 className="font-display text-2xl text-white mb-2">
-          Got it — I'll be in touch within the hour.
+          Got it, I'll be in touch within the hour.
         </h3>
         <p className="text-white/80">
           If it's urgent, you can also call or text{" "}

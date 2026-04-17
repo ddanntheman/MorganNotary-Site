@@ -6,8 +6,8 @@ import type { APIContext } from "astro";
 export async function GET(context: APIContext) {
   const posts = await getCollection("blog", (p) => !p.data.draft);
   return rss({
-    title: `${NAP.legalName} — Blog`,
-    description: "Field notes and guides from Morgan Danner — Richmond's boutique mobile notary.",
+    title: `${NAP.legalName}, Blog`,
+    description: "Field notes and guides from Morgan Danner, Richmond's boutique mobile notary.",
     site: context.site ?? "https://morgannotary.com",
     items: posts
       .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())

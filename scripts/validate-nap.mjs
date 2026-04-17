@@ -3,7 +3,7 @@
  * validate-nap.mjs
  *
  * Ensures that the site's Name / Address / Phone information is referenced
- * only via the shared @lib/nap module — never hard-coded into components,
+ * only via the shared @lib/nap module, never hard-coded into components,
  * pages, or content. A mismatch here is the #1 source of local-SEO damage,
  * so we fail the build if anyone drops a raw phone number into a component.
  */
@@ -52,7 +52,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log("[nap] ok — all NAP references route through @lib/nap.");
+  console.log("[nap] ok, all NAP references route through @lib/nap.");
 }
 
 main().catch((err) => {

@@ -22,6 +22,34 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 
+// Richmond photos per area, hand-curated from Unsplash (CC0). We only
+// attach an image for the marquee areas today; the rest fall through
+// to the gradient hero card and can be filled in later.
+const heroImages: Record<
+  string,
+  { src: string; alt: string; caption: string; credit: string }
+> = {
+  "richmond-va": {
+    src: "https://images.unsplash.com/photo-1584535250253-082add1cd727?auto=format&fit=crop&w=1200&q=80",
+    alt: "Train trestle over the James River at golden hour in Richmond, Virginia",
+    caption: "Richmond. The whole city, end to end.",
+    credit: "Photo, Derrick Brooks / Unsplash",
+  },
+  "downtown-richmond-va": {
+    src: "https://images.unsplash.com/photo-1575474007145-7bc306677fa4?auto=format&fit=crop&w=1200&q=80",
+    alt: "Downtown Richmond, Virginia skyline from across the James River",
+    caption: "Downtown. My base, every day.",
+    credit: "Photo, Unsplash",
+  },
+  "the-fan-richmond-va": {
+    src: "https://images.unsplash.com/photo-1583586604855-62f0cec351d9?auto=format&fit=crop&w=1200&q=80",
+    alt: "Richmond skyline at dusk",
+    caption: "The Fan. Porches and signatures.",
+    credit: "Photo, Unsplash",
+  },
+};
+const heroImage = heroImages[d.slug];
+
 const meta = buildMeta({
   title: d.seo.title,
   description: d.seo.description,
@@ -59,6 +87,7 @@ const jsonLd = [
     ctaPrimary={{ label: "Book a signing", href: "/contact" }}
     ctaSecondary={{ label: "See pricing", href: "/pricing" }}
     variant="light"
+    image={heroImage}
   />
 
   <section class="section-tight">

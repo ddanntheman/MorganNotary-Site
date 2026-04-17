@@ -74,7 +74,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log("[upl] ok — no unauthorized-practice copy detected.");
+  console.log("[upl] ok, no unauthorized-practice copy detected.");
 }
 
 main().catch((err) => {
