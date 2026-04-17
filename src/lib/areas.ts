@@ -1,4 +1,4 @@
-/** Static area metadata — city + county + geo + CTA color. */
+/** Static area metadata, city + county + geo + CTA color. */
 
 export type AreaSlug =
   | "richmond-va"

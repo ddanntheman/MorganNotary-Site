@@ -2,7 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 /* ------------------------------------------------------------------
-   Morgan Danner, Notary — design tokens
+   Morgan Danner, Notary, design tokens
    Mirrored from docs/BRAND-GUIDE.html. Update the brand guide first,
    then this file. Not the other way around.
 -------------------------------------------------------------------*/
@@ -233,12 +233,13 @@
     text-transform: uppercase;
   }
 
-  /* Credential row — the "neon sign" moment */
+  /* Credential row, the "neon sign" moment on dark surfaces.
+     Color is set by the CredentialRow component based on its variant;
+     here we only own typography so light-surface usage stays AA-compliant. */
   .credential-row {
     font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-neon);
     font-size: 0.6875rem;
     font-weight: 500;
   }
@@ -358,6 +359,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-neon);
   animation: pulse-dot 2s ease-in-out infinite;
+  /* Default fallback only, CredentialRow sets the actual background
+     per variant so the color always has enough contrast with its surface. */
+  background: var(--color-emerald);
 }

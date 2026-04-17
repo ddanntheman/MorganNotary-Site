@@ -62,7 +62,7 @@ export const SERVICES: ServiceMeta[] = [
     slug: "general-mobile-notary",
     name: "General mobile notary",
     shortName: "Mobile notary",
-    tagline: "Whatever needs signing — I come to you.",
+    tagline: "Whatever needs signing, I come to you.",
     icon: "user-round",
     order: 5,
     b2b: false,

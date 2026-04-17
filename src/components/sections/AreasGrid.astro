@@ -9,7 +9,7 @@ interface Props {
   exclude?: string;
 }
 const {
-  title = "Richmond metro — I cover the map.",
+  title = "Richmond metro, I cover the map.",
   eyebrow = "Service areas",
   exclude,
 } = Astro.props;
@@ -23,7 +23,7 @@ const items = AREAS.filter((a) => a.slug !== exclude);
       <h2 class="font-display text-3xl sm:text-4xl mb-3">{title}</h2>
       <p class="text-[color:var(--color-text-secondary)] text-base max-w-2xl">
         Based in Richmond. Regular rounds across Chesterfield, Henrico, and
-        Hanover. Travel fee is flat across the standard service area — no
+        Hanover. Travel fee is flat across the standard service area, no
         surprises.
       </p>
     </SectionHeader>
