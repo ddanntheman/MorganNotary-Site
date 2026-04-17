@@ -5,6 +5,11 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
   "redirects": [
     { "source": "/services", "destination": "/#services", "permanent": false },
     { "source": "/areas", "destination": "/#service-areas", "permanent": false }

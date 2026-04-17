@@ -1,0 +1,590 @@
+# Sveltia CMS configuration for Morgan Danner, Notary.
+#
+# Editors authenticate via GitHub OAuth. Every save becomes a commit
+# on the `main` branch, which triggers Vercel to redeploy automatically.
+#
+# Adding editors: GitHub repo → Settings → Collaborators → invite by
+# GitHub username. After they accept, they can log in at /admin.
+
+backend:
+  name: github
+  repo: ddanntheman/MorganNotary-Site
+  branch: main
+  # Sveltia ships with built-in GitHub auth via its hosted service.
+  # No extra OAuth app setup required for the default flow.
+  commit_messages:
+    create: "CMS: create {{collection}} '{{slug}}'"
+    update: "CMS: update {{collection}} '{{slug}}'"
+    delete: "CMS: delete {{collection}} '{{slug}}'"
+    uploadMedia: "CMS: upload {{path}}"
+    deleteMedia: "CMS: delete media {{path}}"
+
+# Where the CMS stores uploaded photos. Astro serves /public/ as /.
+media_folder: "public/images"
+public_folder: "/images"
+
+# Surface the live site at the top of the CMS so editors can preview.
+site_url: https://morgannotary.com
+display_url: https://morgannotary.com
+logo_url: https://morgannotary.com/favicon.svg
+
+# Every save opens a PR instead of pushing straight to main — safer for
+# a non-technical editor. Drew can flip editorial_workflow off later if
+# he prefers direct-to-main commits.
+publish_mode: editorial_workflow
+
+# Only content files are editable. Code, config, and design tokens stay
+# locked to the engineering workflow.
+collections:
+  # ─────────────────────────────────────────────────────────────────
+  # Top-level site pages (home, about, pricing, contact, faq, etc.)
+  # ─────────────────────────────────────────────────────────────────
+  - name: site
+    label: Site pages
+    label_singular: Page
+    folder: src/content/site
+    create: false
+    delete: false
+    format: frontmatter
+    extension: mdx
+    identifier_field: h1
+    editor:
+      preview: false
+    fields:
+      - {
+          label: Page type,
+          name: pageType,
+          widget: select,
+          options:
+            [home, about, pricing, contact, faq, peoples-rate, legal],
+        }
+      - label: Greeting (handwritten, optional)
+        name: greeting
+        widget: string
+        required: false
+        hint: Shown above the H1 in the hero in script font.
+      - { label: H1 headline, name: h1, widget: string }
+      - {
+          label: Subheadline,
+          name: subhead,
+          widget: text,
+          required: false,
+        }
+      - {
+          label: Hero image URL,
+          name: heroImage,
+          widget: string,
+          required: false,
+        }
+      - label: Primary CTA
+        name: ctaPrimary
+        widget: object
+        required: false
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: Link, name: href, widget: string }
+          - {
+              label: Style,
+              name: variant,
+              widget: select,
+              options: [primary, secondary, ghost, dark],
+              default: primary,
+            }
+      - label: Secondary CTA
+        name: ctaSecondary
+        widget: object
+        required: false
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: Link, name: href, widget: string }
+          - {
+              label: Style,
+              name: variant,
+              widget: select,
+              options: [primary, secondary, ghost, dark],
+              default: secondary,
+            }
+      - label: SEO
+        name: seo
+        widget: object
+        fields:
+          - {
+              label: Page title,
+              name: title,
+              widget: string,
+              hint: 20–75 characters.,
+            }
+          - {
+              label: Meta description,
+              name: description,
+              widget: text,
+              hint: 80–180 characters.,
+            }
+          - {
+              label: Keywords,
+              name: keywords,
+              widget: list,
+              required: false,
+            }
+          - {
+              label: Canonical URL,
+              name: canonical,
+              widget: string,
+              required: false,
+            }
+          - {
+              label: Hide from search engines,
+              name: noindex,
+              widget: boolean,
+              default: false,
+            }
+      - {
+          label: Last updated,
+          name: lastUpdated,
+          widget: datetime,
+          format: YYYY-MM-DD,
+          time_format: false,
+          date_format: YYYY-MM-DD,
+        }
+      - {
+          label: Body,
+          name: body,
+          widget: markdown,
+          required: false,
+          hint: Long-form content below the hero.,
+        }
+
+  # ─────────────────────────────────────────────────────────────────
+  # Services (loan signing, estate, RON, apostille, mobile, POA)
+  # ─────────────────────────────────────────────────────────────────
+  - name: services
+    label: Services
+    label_singular: Service
+    folder: src/content/services
+    create: true
+    format: frontmatter
+    extension: mdx
+    identifier_field: name
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug (URL path), name: slug, widget: string }
+      - { label: Name, name: name, widget: string }
+      - { label: Short name, name: shortName, widget: string }
+      - { label: Tagline, name: tagline, widget: string }
+      - label: Icon (Lucide name)
+        name: icon
+        widget: string
+        hint: "e.g. file-signature, heart-handshake, globe. See astro.config.mjs for the allowed list."
+      - {
+          label: Sort order,
+          name: order,
+          widget: number,
+          value_type: int,
+          min: 1,
+        }
+      - { label: H1 headline, name: h1, widget: string }
+      - { label: Subhead, name: subhead, widget: text }
+      - {
+          label: Consumer copy,
+          name: consumerCopy,
+          widget: text,
+          hint: Displayed to individuals & families.,
+        }
+      - {
+          label: B2B copy,
+          name: b2bCopy,
+          widget: text,
+          required: false,
+          hint: Displayed to title companies, lenders, attorneys.,
+        }
+      - label: Pull quote (optional)
+        name: pullQuote
+        widget: object
+        required: false
+        fields:
+          - { label: Quote text, name: text, widget: text }
+          - {
+              label: Attribution,
+              name: attribution,
+              widget: string,
+              required: false,
+            }
+      - label: Pricing rows
+        name: pricing
+        widget: list
+        required: false
+        fields:
+          - { label: Label, name: label, widget: string }
+          - {
+              label: Price,
+              name: price,
+              widget: string,
+              hint: "e.g. $35 or Call for quote.",
+            }
+          - {
+              label: Includes,
+              name: includes,
+              widget: string,
+              required: false,
+            }
+      - label: Process steps
+        name: process
+        widget: list
+        required: false
+        fields:
+          - {
+              label: Step number,
+              name: step,
+              widget: number,
+              value_type: int,
+            }
+          - { label: Title, name: title, widget: string }
+          - { label: Detail, name: detail, widget: text }
+      - {
+          label: Signing platforms,
+          name: platforms,
+          widget: list,
+          required: false,
+        }
+      - {
+          label: Related FAQ topics,
+          name: relatedFaqTopics,
+          widget: list,
+          required: false,
+        }
+      - {
+          label: Related areas,
+          name: relatedAreas,
+          widget: list,
+          default: ["richmond-va"],
+        }
+      - label: SEO
+        name: seo
+        widget: object
+        fields:
+          - { label: Page title, name: title, widget: string }
+          - {
+              label: Meta description,
+              name: description,
+              widget: text,
+            }
+          - {
+              label: Keywords,
+              name: keywords,
+              widget: list,
+              required: false,
+            }
+      - {
+          label: Last updated,
+          name: lastUpdated,
+          widget: datetime,
+          format: YYYY-MM-DD,
+          time_format: false,
+          date_format: YYYY-MM-DD,
+        }
+      - {
+          label: Body,
+          name: body,
+          widget: markdown,
+          required: false,
+        }
+
+  # ─────────────────────────────────────────────────────────────────
+  # Service areas (Richmond + 30 neighborhoods/jurisdictions)
+  # ─────────────────────────────────────────────────────────────────
+  - name: areas
+    label: Service areas
+    label_singular: Service area
+    folder: src/content/areas
+    create: true
+    format: frontmatter
+    extension: mdx
+    identifier_field: city
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug (URL path), name: slug, widget: string }
+      - { label: City, name: city, widget: string }
+      - { label: State, name: state, widget: string, default: "VA" }
+      - { label: County, name: county, widget: string }
+      - {
+          label: ZIP codes,
+          name: zipCodes,
+          widget: list,
+          field: { label: ZIP, name: zip, widget: string },
+        }
+      - { label: Latitude, name: latitude, widget: number }
+      - { label: Longitude, name: longitude, widget: number }
+      - {
+          label: Population,
+          name: population,
+          widget: number,
+          required: false,
+        }
+      - { label: H1 headline, name: h1, widget: string }
+      - { label: Hero blurb, name: heroBlurb, widget: text }
+      - label: Local callout
+        name: localCallout
+        widget: object
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: text }
+          - { label: References, name: references, widget: list }
+      - {
+          label: Drive time from base,
+          name: driveTimeFromBase,
+          widget: string,
+        }
+      - { label: Neighborhoods covered, name: neighborhoodsCovered, widget: list }
+      - label: Area-specific FAQ
+        name: areaSpecificFaq
+        widget: list
+        min: 2
+        max: 4
+        fields:
+          - { label: Question, name: question, widget: string }
+          - { label: Answer, name: answer, widget: text }
+      - {
+          label: Testimonial highlight,
+          name: testimonialHighlight,
+          widget: string,
+          required: false,
+        }
+      - label: CTA color
+        name: ctaColor
+        widget: select
+        options: [plum, emerald, navy, gold]
+        default: plum
+      - label: SEO
+        name: seo
+        widget: object
+        fields:
+          - { label: Page title, name: title, widget: string }
+          - {
+              label: Meta description,
+              name: description,
+              widget: text,
+            }
+          - {
+              label: Keywords,
+              name: keywords,
+              widget: list,
+              required: false,
+            }
+      - {
+          label: Last updated,
+          name: lastUpdated,
+          widget: datetime,
+          format: YYYY-MM-DD,
+          time_format: false,
+          date_format: YYYY-MM-DD,
+        }
+      - {
+          label: Body,
+          name: body,
+          widget: markdown,
+          required: false,
+        }
+
+  # ─────────────────────────────────────────────────────────────────
+  # FAQ items
+  # ─────────────────────────────────────────────────────────────────
+  - name: faq
+    label: FAQ items
+    label_singular: FAQ item
+    folder: src/content/faq-items
+    create: true
+    format: frontmatter
+    extension: mdx
+    identifier_field: question
+    slug: "{{id}}-{{slug}}"
+    fields:
+      - {
+          label: ID,
+          name: id,
+          widget: string,
+          hint: "Short numeric or slug ID, e.g. 01 or peoples-rate.",
+        }
+      - { label: Question, name: question, widget: string }
+      - { label: Answer, name: answer, widget: text }
+      - label: Topics
+        name: topics
+        widget: list
+        min: 1
+        field:
+          label: Topic
+          name: topic
+          widget: select
+          options:
+            [
+              general,
+              loan-signing,
+              estate-trust,
+              remote-online-notary,
+              apostille,
+              pricing,
+              scheduling,
+              peoples-rate,
+              mobile,
+              for-partners,
+            ]
+      - label: Audience
+        name: audience
+        widget: select
+        options: [consumer, partner, both]
+        default: both
+      - {
+          label: Sort order,
+          name: order,
+          widget: number,
+          value_type: int,
+          default: 100,
+        }
+      - { label: Featured on home, name: featured, widget: boolean, default: false }
+      - {
+          label: Areas,
+          name: areas,
+          widget: list,
+          required: false,
+        }
+      - {
+          label: Last updated,
+          name: lastUpdated,
+          widget: datetime,
+          format: YYYY-MM-DD,
+          time_format: false,
+          date_format: YYYY-MM-DD,
+        }
+
+  # ─────────────────────────────────────────────────────────────────
+  # Testimonials
+  # ─────────────────────────────────────────────────────────────────
+  - name: testimonials
+    label: Testimonials
+    label_singular: Testimonial
+    folder: src/content/testimonials
+    create: true
+    format: frontmatter
+    extension: mdx
+    identifier_field: author
+    fields:
+      - { label: ID, name: id, widget: string }
+      - { label: Quote, name: quote, widget: text }
+      - { label: Author, name: author, widget: string }
+      - { label: City, name: city, widget: string }
+      - label: Service
+        name: service
+        widget: select
+        options:
+          [loan-signing, estate-trust, remote-online-notary, apostille, general, partner]
+      - {
+          label: Rating (1–5),
+          name: rating,
+          widget: number,
+          value_type: int,
+          min: 1,
+          max: 5,
+          default: 5,
+        }
+      - label: Composite testimonial
+        name: isComposite
+        widget: boolean
+        default: true
+        hint: Mark false only if the client gave written consent for this exact quote.
+      - {
+          label: Consent on file,
+          name: consentOnFile,
+          widget: boolean,
+          default: false,
+        }
+      - {
+          label: Date published,
+          name: datePublished,
+          widget: datetime,
+          format: YYYY-MM-DD,
+          time_format: false,
+          date_format: YYYY-MM-DD,
+        }
+
+  # ─────────────────────────────────────────────────────────────────
+  # Blog posts
+  # ─────────────────────────────────────────────────────────────────
+  - name: blog
+    label: Blog posts
+    label_singular: Blog post
+    folder: src/content/blog
+    create: true
+    format: frontmatter
+    extension: mdx
+    identifier_field: title
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug (URL path), name: slug, widget: string }
+      - {
+          label: Title,
+          name: title,
+          widget: string,
+          hint: 20–80 characters.,
+        }
+      - {
+          label: Description,
+          name: description,
+          widget: text,
+          hint: 80–180 characters.,
+        }
+      - {
+          label: Publish date,
+          name: publishDate,
+          widget: datetime,
+          format: YYYY-MM-DD,
+          time_format: false,
+          date_format: YYYY-MM-DD,
+        }
+      - {
+          label: Updated date,
+          name: updatedDate,
+          widget: datetime,
+          required: false,
+          format: YYYY-MM-DD,
+          time_format: false,
+          date_format: YYYY-MM-DD,
+        }
+      - {
+          label: Author,
+          name: author,
+          widget: string,
+          default: Morgan Danner,
+        }
+      - {
+          label: Hero image URL,
+          name: heroImage,
+          widget: string,
+          required: false,
+        }
+      - {
+          label: Hero alt text,
+          name: heroAlt,
+          widget: string,
+          required: false,
+        }
+      - { label: Topics, name: topics, widget: list }
+      - {
+          label: Related services,
+          name: relatedServices,
+          widget: list,
+          required: false,
+        }
+      - {
+          label: Related areas,
+          name: relatedAreas,
+          widget: list,
+          required: false,
+        }
+      - { label: Draft (hide from site), name: draft, widget: boolean, default: false }
+      - {
+          label: Reading time,
+          name: readingTime,
+          widget: string,
+          required: false,
+          hint: "e.g. 3 min",
+        }
+      - { label: Body, name: body, widget: markdown }
