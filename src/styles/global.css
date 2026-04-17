@@ -90,13 +90,23 @@
   h3 {
     font-family: var(--font-display);
     font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.005em;
+    line-height: 1.18;
+    letter-spacing: 0;
     color: var(--color-text-primary);
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-variant-ligatures: common-ligatures contextual;
   }
   h1 {
-    line-height: 1.02;
-    letter-spacing: -0.015em;
+    line-height: 1.08;
+    letter-spacing: 0.002em;
+  }
+  /* Hero H1 specifically — Cormorant Garamond crowds apostrophe
+     pairs like "you'd / your" at display sizes. A whisper of
+     positive tracking prevents ascenders from colliding with the
+     following word without looking spaced-out. */
+  .hero-h1 {
+    letter-spacing: 0.005em;
+    word-spacing: 0.04em;
   }
   h4,
   h5,
