@@ -1,13 +1,8 @@
-/** Static area metadata, city + county + geo + CTA color. */
+/** Static area metadata, city + county + geo + CTA color.
+ *  Slug is typed as a plain string so we can add neighborhoods and
+ *  surrounding jurisdictions without widening a literal union each time. */
 
-export type AreaSlug =
-  | "richmond-va"
-  | "midlothian-va"
-  | "glen-allen-va"
-  | "mechanicsville-va"
-  | "chester-va"
-  | "short-pump-va"
-  | "ashland-va";
+export type AreaSlug = string;
 
 export interface AreaMeta {
   slug: AreaSlug;
@@ -17,9 +12,13 @@ export interface AreaMeta {
   latitude: number;
   longitude: number;
   ctaColor: "plum" | "emerald" | "navy" | "gold";
+  /** Grouping for AreasGrid: "metro" = Richmond parent, "neighborhood" =
+   *  Richmond city sub-area, "jurisdiction" = surrounding city/county. */
+  group?: "metro" | "neighborhood" | "jurisdiction";
 }
 
 export const AREAS: AreaMeta[] = [
+  // Richmond metro (parent)
   {
     slug: "richmond-va",
     city: "Richmond",
@@ -28,7 +27,9 @@ export const AREAS: AreaMeta[] = [
     latitude: 37.5407,
     longitude: -77.436,
     ctaColor: "plum",
+    group: "metro",
   },
+  // Surrounding jurisdictions
   {
     slug: "midlothian-va",
     city: "Midlothian",
@@ -37,6 +38,7 @@ export const AREAS: AreaMeta[] = [
     latitude: 37.5071,
     longitude: -77.6561,
     ctaColor: "navy",
+    group: "jurisdiction",
   },
   {
     slug: "glen-allen-va",
@@ -46,6 +48,7 @@ export const AREAS: AreaMeta[] = [
     latitude: 37.6652,
     longitude: -77.5147,
     ctaColor: "emerald",
+    group: "jurisdiction",
   },
   {
     slug: "mechanicsville-va",
@@ -55,6 +58,7 @@ export const AREAS: AreaMeta[] = [
     latitude: 37.6087,
     longitude: -77.3733,
     ctaColor: "gold",
+    group: "jurisdiction",
   },
   {
     slug: "chester-va",
@@ -64,6 +68,7 @@ export const AREAS: AreaMeta[] = [
     latitude: 37.3568,
     longitude: -77.4406,
     ctaColor: "plum",
+    group: "jurisdiction",
   },
   {
     slug: "short-pump-va",
@@ -73,6 +78,7 @@ export const AREAS: AreaMeta[] = [
     latitude: 37.6529,
     longitude: -77.6144,
     ctaColor: "navy",
+    group: "jurisdiction",
   },
   {
     slug: "ashland-va",
@@ -82,6 +88,238 @@ export const AREAS: AreaMeta[] = [
     latitude: 37.7595,
     longitude: -77.4797,
     ctaColor: "emerald",
+    group: "jurisdiction",
+  },
+  {
+    slug: "bon-air-va",
+    city: "Bon Air",
+    county: "Chesterfield",
+    driveTime: "~15 min",
+    latitude: 37.5262,
+    longitude: -77.568,
+    ctaColor: "plum",
+    group: "jurisdiction",
+  },
+  {
+    slug: "colonial-heights-va",
+    city: "Colonial Heights",
+    county: "Colonial Heights City",
+    driveTime: "~30 min",
+    latitude: 37.265,
+    longitude: -77.4103,
+    ctaColor: "navy",
+    group: "jurisdiction",
+  },
+  {
+    slug: "hopewell-va",
+    city: "Hopewell",
+    county: "Hopewell City",
+    driveTime: "~35 min",
+    latitude: 37.3043,
+    longitude: -77.2872,
+    ctaColor: "emerald",
+    group: "jurisdiction",
+  },
+  {
+    slug: "petersburg-va",
+    city: "Petersburg",
+    county: "Petersburg City",
+    driveTime: "~35 min",
+    latitude: 37.2279,
+    longitude: -77.4019,
+    ctaColor: "gold",
+    group: "jurisdiction",
+  },
+  {
+    slug: "sandston-va",
+    city: "Sandston",
+    county: "Henrico",
+    driveTime: "~20 min",
+    latitude: 37.525,
+    longitude: -77.3211,
+    ctaColor: "plum",
+    group: "jurisdiction",
+  },
+  {
+    slug: "highland-springs-va",
+    city: "Highland Springs",
+    county: "Henrico",
+    driveTime: "~15 min",
+    latitude: 37.5465,
+    longitude: -77.3286,
+    ctaColor: "navy",
+    group: "jurisdiction",
+  },
+  {
+    slug: "varina-va",
+    city: "Varina",
+    county: "Henrico",
+    driveTime: "~20 min",
+    latitude: 37.452,
+    longitude: -77.318,
+    ctaColor: "emerald",
+    group: "jurisdiction",
+  },
+  {
+    slug: "moseley-va",
+    city: "Moseley",
+    county: "Chesterfield",
+    driveTime: "~35 min",
+    latitude: 37.4182,
+    longitude: -77.7758,
+    ctaColor: "gold",
+    group: "jurisdiction",
+  },
+  // Richmond neighborhoods (sub-city)
+  {
+    slug: "the-fan-richmond-va",
+    city: "The Fan",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.5535,
+    longitude: -77.4606,
+    ctaColor: "plum",
+    group: "neighborhood",
+  },
+  {
+    slug: "church-hill-richmond-va",
+    city: "Church Hill",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.534,
+    longitude: -77.4205,
+    ctaColor: "emerald",
+    group: "neighborhood",
+  },
+  {
+    slug: "shockoe-bottom-richmond-va",
+    city: "Shockoe Bottom",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.5358,
+    longitude: -77.4331,
+    ctaColor: "navy",
+    group: "neighborhood",
+  },
+  {
+    slug: "carytown-richmond-va",
+    city: "Carytown",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.5535,
+    longitude: -77.4758,
+    ctaColor: "plum",
+    group: "neighborhood",
+  },
+  {
+    slug: "scotts-addition-richmond-va",
+    city: "Scott's Addition",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.5636,
+    longitude: -77.4767,
+    ctaColor: "gold",
+    group: "neighborhood",
+  },
+  {
+    slug: "manchester-richmond-va",
+    city: "Manchester",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.523,
+    longitude: -77.441,
+    ctaColor: "emerald",
+    group: "neighborhood",
+  },
+  {
+    slug: "museum-district-richmond-va",
+    city: "Museum District",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.555,
+    longitude: -77.471,
+    ctaColor: "navy",
+    group: "neighborhood",
+  },
+  {
+    slug: "near-west-end-richmond-va",
+    city: "Near West End",
+    county: "Richmond City",
+    driveTime: "~10 min",
+    latitude: 37.5763,
+    longitude: -77.493,
+    ctaColor: "plum",
+    group: "neighborhood",
+  },
+  {
+    slug: "forest-hill-richmond-va",
+    city: "Forest Hill",
+    county: "Richmond City",
+    driveTime: "~10 min",
+    latitude: 37.5191,
+    longitude: -77.4826,
+    ctaColor: "emerald",
+    group: "neighborhood",
+  },
+  {
+    slug: "northside-richmond-va",
+    city: "Northside",
+    county: "Richmond City",
+    driveTime: "~10 min",
+    latitude: 37.5776,
+    longitude: -77.4488,
+    ctaColor: "gold",
+    group: "neighborhood",
+  },
+  {
+    slug: "jackson-ward-richmond-va",
+    city: "Jackson Ward",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.5471,
+    longitude: -77.4389,
+    ctaColor: "plum",
+    group: "neighborhood",
+  },
+  {
+    slug: "oregon-hill-richmond-va",
+    city: "Oregon Hill",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.5399,
+    longitude: -77.4509,
+    ctaColor: "navy",
+    group: "neighborhood",
+  },
+  {
+    slug: "west-end-richmond-va",
+    city: "West End",
+    county: "Henrico",
+    driveTime: "~15 min",
+    latitude: 37.591,
+    longitude: -77.552,
+    ctaColor: "emerald",
+    group: "neighborhood",
+  },
+  {
+    slug: "downtown-richmond-va",
+    city: "Downtown Richmond",
+    county: "Richmond City",
+    driveTime: "~5 min",
+    latitude: 37.5407,
+    longitude: -77.436,
+    ctaColor: "plum",
+    group: "neighborhood",
+  },
+  {
+    slug: "innsbrook-va",
+    city: "Innsbrook",
+    county: "Henrico",
+    driveTime: "~15 min",
+    latitude: 37.6534,
+    longitude: -77.5746,
+    ctaColor: "navy",
+    group: "jurisdiction",
   },
 ];
 
