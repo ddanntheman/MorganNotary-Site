@@ -15,16 +15,16 @@ const all = await getCollection("faqItems");
 const sorted = all.sort((a, b) => a.data.order - b.data.order);
 
 const groups = [
-  { key: "general", title: "The basics" },
+  { key: "general", title: "The Basics" },
   { key: "pricing", title: "Pricing" },
-  { key: "scheduling", title: "Scheduling &amp; travel" },
-  { key: "mobile", title: "Mobile visits" },
-  { key: "loan-signing", title: "Loan signings" },
-  { key: "estate-trust", title: "Estate &amp; trust" },
-  { key: "remote-online-notary", title: "Remote online (RON)" },
+  { key: "scheduling", title: "Scheduling & Travel" },
+  { key: "mobile", title: "Mobile Visits" },
+  { key: "loan-signing", title: "Loan Signings" },
+  { key: "estate-trust", title: "Estate & Trust" },
+  { key: "remote-online-notary", title: "Remote Online (RON)" },
   { key: "apostille", title: "Apostille" },
   { key: "peoples-rate", title: "The People's Rate" },
-  { key: "for-partners", title: "For partners" },
+  { key: "for-partners", title: "For Partners" },
 ] as const;
 
 const grouped = groups
