@@ -9,7 +9,8 @@ export type ServiceSlug =
   | "estate-trust"
   | "remote-online-notary"
   | "apostille"
-  | "general-mobile-notary";
+  | "general-mobile-notary"
+  | "power-of-attorney";
 
 export interface ServiceMeta {
   slug: ServiceSlug;
@@ -65,6 +66,15 @@ export const SERVICES: ServiceMeta[] = [
     tagline: "Whatever needs signing, I come to you.",
     icon: "user-round",
     order: 5,
+    b2b: false,
+  },
+  {
+    slug: "power-of-attorney",
+    name: "Power of attorney & directives",
+    shortName: "POA & directives",
+    tagline: "Signed properly, when it matters most.",
+    icon: "file-pen",
+    order: 6,
     b2b: false,
   },
 ];
