@@ -1,13 +1,27 @@
 ---
 interface Props {
   eyebrow?: string;
+  /** Optional handwritten "kicker" rendered above the heading in
+   *  Caveat script. Adds warmth so section tops don't read as
+   *  robotic mono labels. */
+  kicker?: string;
   align?: "left" | "center";
   class?: string;
 }
-const { eyebrow, align = "left", class: className = "" } = Astro.props;
+const { eyebrow, kicker, align = "left", class: className = "" } = Astro.props;
 ---
 
 <div class={`${align === "center" ? "text-center mx-auto max-w-3xl" : "max-w-3xl"} ${className}`}>
-  {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
+  {kicker && (
+    <p class={`font-[family-name:var(--font-hand)] text-2xl sm:text-3xl leading-none text-[color:var(--color-plum)] mb-3 ${align === "center" ? "" : ""}`}>
+      {kicker}
+    </p>
+  )}
+  {eyebrow && (
+    <p class="eyebrow eyebrow-accent mb-3 inline-flex items-center gap-2">
+      <span class="eyebrow-accent-dot" aria-hidden="true"></span>
+      {eyebrow}
+    </p>
+  )}
   <slot />
 </div>

@@ -14,35 +14,35 @@ const topAreas = topAreaCities
   .filter((a): a is (typeof AREAS)[number] => Boolean(a));
 ---
 
-<footer class="bg-[color:var(--color-charcoal)] text-[color:rgba(255,255,255,0.78)] mt-24">
+<footer class="bg-[color:var(--color-ice)] text-[color:var(--color-text-primary)] mt-24 border-t border-[color:var(--color-ice-deep)]">
   <div class="container-brand section-tight grid gap-10 lg:grid-cols-4">
     <div class="space-y-4">
-      <div class="flex items-center gap-3 text-white">
-        <span class="inline-flex size-10 items-center justify-center rounded-full bg-[color:var(--color-plum)] font-display text-xl">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex size-10 items-center justify-center rounded-full bg-[color:var(--color-plum)] text-white font-display text-xl">
           M
         </span>
         <div class="leading-tight">
-          <div class="font-display text-xl text-white">Morgan Danner</div>
-          <div class="eyebrow eyebrow-neon">Notary · Richmond, VA</div>
+          <div class="font-display text-xl">Morgan Danner</div>
+          <div class="eyebrow text-[color:var(--color-plum)]">Notary · Richmond, VA</div>
         </div>
       </div>
-      <p class="text-sm max-w-xs">
+      <p class="text-sm max-w-xs text-[color:var(--color-text-secondary)]">
         {NAP.description}
       </p>
-      <p class="text-xs font-mono-brand text-[color:rgba(255,255,255,0.55)]">
+      <p class="text-xs font-mono-brand text-[color:var(--color-text-tertiary)]">
         VA Commission #{NAP.commission} · Licensed · Insured · NNA Member
       </p>
     </div>
 
     <div>
-      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-neon)] mb-3">
+      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-plum)] mb-3">
         Services
       </h2>
       <ul class="space-y-2">
         {
           SERVICES.map((s) => (
             <li>
-              <a class="text-sm text-white/80 no-underline hover:text-white" href={`/services/${s.slug}`}>
+              <a class="text-sm text-[color:var(--color-text-secondary)] no-underline hover:text-[color:var(--color-plum)]" href={`/services/${s.slug}`}>
                 {s.name}
               </a>
             </li>
@@ -52,14 +52,14 @@ const topAreas = topAreaCities
     </div>
 
     <div>
-      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-neon)] mb-3">
+      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-plum)] mb-3">
         Service areas
       </h2>
       <ul class="grid grid-cols-2 gap-x-4 gap-y-2">
         {
           topAreas.map((a) => (
             <li>
-              <a class="text-sm text-white/80 no-underline hover:text-white" href={`/areas/${a.slug}`}>
+              <a class="text-sm text-[color:var(--color-text-secondary)] no-underline hover:text-[color:var(--color-plum)]" href={`/areas/${a.slug}`}>
                 {a.city}
               </a>
             </li>
@@ -67,51 +67,51 @@ const topAreas = topAreaCities
         }
       </ul>
       <a
-        class="mt-4 inline-flex items-center gap-1 text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-neon)] no-underline hover:text-white"
+        class="mt-4 inline-flex items-center gap-1 text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-plum)] no-underline hover:underline"
         href="/#service-areas"
       >
         See all neighborhoods
         <Icon name="lucide:arrow-right" class="size-3" />
       </a>
-      <p class="mt-3 text-xs text-white/55 max-w-[22ch]">
+      <p class="mt-3 text-xs text-[color:var(--color-text-tertiary)] max-w-[22ch]">
         Richmond plus a 50-mile radius. Flat travel inside the standard area.
       </p>
     </div>
 
-    <div class="space-y-4">
-      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-neon)] mb-3">
+    <div class="space-y-3">
+      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-plum)] mb-3">
         Connect
       </h2>
-      <a class="flex items-center gap-2 text-sm text-white no-underline" href={TEL_HREF}>
-        <Icon name="lucide:phone" class="size-4" />
+      <a class="flex items-center gap-2 text-sm text-[color:var(--color-text-primary)] no-underline hover:text-[color:var(--color-plum)]" href={TEL_HREF}>
+        <Icon name="lucide:phone" class="size-4 text-[color:var(--color-plum)]" />
         <span class="font-mono-brand">{NAP.phoneDisplay}</span>
       </a>
-      <a class="flex items-center gap-2 text-sm text-white no-underline" href={MAILTO_HREF}>
-        <Icon name="lucide:mail" class="size-4" />
+      <a class="flex items-center gap-2 text-sm text-[color:var(--color-text-primary)] no-underline hover:text-[color:var(--color-plum)]" href={MAILTO_HREF}>
+        <Icon name="lucide:mail" class="size-4 text-[color:var(--color-plum)]" />
         <span>{NAP.email}</span>
       </a>
-      <a class="flex items-center gap-2 text-sm text-white no-underline" href="/contact">
-        <Icon name="lucide:calendar" class="size-4" />
+      <a class="flex items-center gap-2 text-sm text-[color:var(--color-text-primary)] no-underline hover:text-[color:var(--color-plum)]" href="/contact">
+        <Icon name="lucide:calendar" class="size-4 text-[color:var(--color-plum)]" />
         <span>Book a signing</span>
       </a>
-      <div class="pt-2 space-y-1 text-xs text-white/60">
-        <div><span class="font-mono-brand uppercase text-[color:var(--color-neon)] text-[10px] tracking-widest">Mon–Fri</span> · {NAP.hours.mondayFriday.display}</div>
-        <div><span class="font-mono-brand uppercase text-[color:var(--color-neon)] text-[10px] tracking-widest">Sat</span> · {NAP.hours.saturday.display}</div>
-        <div><span class="font-mono-brand uppercase text-[color:var(--color-neon)] text-[10px] tracking-widest">Sun</span> · {NAP.hours.sunday.display}</div>
+      <div class="pt-2 space-y-1 text-xs text-[color:var(--color-text-secondary)]">
+        <div><span class="font-mono-brand uppercase text-[color:var(--color-plum)] text-[10px] tracking-widest">Mon–Fri</span> · {NAP.hours.mondayFriday.display}</div>
+        <div><span class="font-mono-brand uppercase text-[color:var(--color-plum)] text-[10px] tracking-widest">Sat</span> · {NAP.hours.saturday.display}</div>
+        <div><span class="font-mono-brand uppercase text-[color:var(--color-plum)] text-[10px] tracking-widest">Sun</span> · {NAP.hours.sunday.display}</div>
       </div>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
-    <div class="container-brand py-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between text-xs text-white/60">
+  <div class="border-t border-[color:var(--color-ice-deep)]">
+    <div class="container-brand py-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between text-xs text-[color:var(--color-text-secondary)]">
       <div>
         © {year} {NAP.legalName}. Richmond, VA.
       </div>
       <nav aria-label="Legal" class="flex flex-wrap gap-4">
-        <a class="text-white/70 no-underline hover:text-white" href="/legal/privacy">Privacy</a>
-        <a class="text-white/70 no-underline hover:text-white" href="/legal/terms">Terms</a>
-        <a class="text-white/70 no-underline hover:text-white" href="/legal/accessibility">Accessibility</a>
-        <a class="text-white/70 no-underline hover:text-white" href="/peoples-rate">The People's Rate</a>
+        <a class="text-[color:var(--color-text-secondary)] no-underline hover:text-[color:var(--color-plum)]" href="/legal/privacy">Privacy</a>
+        <a class="text-[color:var(--color-text-secondary)] no-underline hover:text-[color:var(--color-plum)]" href="/legal/terms">Terms</a>
+        <a class="text-[color:var(--color-text-secondary)] no-underline hover:text-[color:var(--color-plum)]" href="/legal/accessibility">Accessibility</a>
+        <a class="text-[color:var(--color-text-secondary)] no-underline hover:text-[color:var(--color-plum)]" href="/peoples-rate">The People's Rate</a>
       </nav>
     </div>
   </div>
