@@ -9,9 +9,12 @@ interface Props {
 }
 const { tone = "info", title, icon, class: className = "" } = Astro.props;
 
+// Every tone uses its darkest variant for the title/icon color so body
+// text and heading both clear WCAG AA on the tinted background. The old
+// warn tone put gold-on-gold-light at ~3.1:1, a colorblind-safe fail.
 const tones = {
   info: "bg-[color:var(--color-navy-light)] border-[color:var(--color-navy)] text-[color:var(--color-navy)]",
-  warn: "bg-[color:var(--color-gold-light)] border-[color:var(--color-gold)] text-[color:var(--color-gold)]",
+  warn: "bg-[color:var(--color-amber-cream)] border-[color:var(--color-amber-dark)] text-[color:var(--color-amber-dark)]",
   error:
     "bg-[color:var(--color-red-light)] border-[color:var(--color-red)] text-[color:var(--color-red)]",
   success:

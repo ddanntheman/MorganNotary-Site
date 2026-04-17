@@ -35,13 +35,13 @@ const items = (filter ? all.filter((t) => filter(t)) : all).slice(0, limit);
       {
         items.map((t) => (
           <li>
-            <Card>
+            <Card variant="warm">
               <div
-                class="flex gap-1 text-[color:var(--color-gold)] mb-3"
+                class="flex gap-1 text-[color:var(--color-plum)] mb-3"
                 aria-label={`Rated ${t.data.rating} out of 5`}
               >
                 {Array.from({ length: t.data.rating }).map(() => (
-                  <Icon name="lucide:star" class="size-4" />
+                  <Icon name="lucide:star" class="size-4 fill-[color:var(--color-plum)]" />
                 ))}
               </div>
               <blockquote class="font-display text-xl leading-snug italic text-[color:var(--color-text-primary)]">
