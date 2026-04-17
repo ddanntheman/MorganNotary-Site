@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Morgan Danner Notary">
+  <rect width="64" height="64" rx="14" fill="#5B2D82"/>
+  <path d="M14 46V18h5l10 16 10-16h5v28h-5V28.5L29.5 43h-1L19 28.5V46z" fill="#FAF9F6" />
+  <circle cx="50" cy="48" r="4" fill="#C8F53A" />
+</svg>

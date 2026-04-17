@@ -1,0 +1,44 @@
+---
+type Variant = "primary" | "secondary" | "ghost" | "dark";
+
+interface Props {
+  variant?: Variant;
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  full?: boolean;
+  class?: string;
+  ariaLabel?: string;
+  disabled?: boolean;
+}
+
+const {
+  variant = "primary",
+  href,
+  type = "button",
+  full = false,
+  class: className = "",
+  ariaLabel,
+  disabled = false,
+} = Astro.props;
+
+const base = {
+  primary: "btn btn-primary",
+  secondary: "btn btn-secondary",
+  ghost: "btn btn-ghost",
+  dark: "btn btn-dark",
+}[variant];
+
+const classes = [base, full ? "w-full justify-center" : "", className].filter(Boolean).join(" ");
+---
+
+{
+  href ? (
+    <a href={href} class={classes} aria-label={ariaLabel}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} aria-label={ariaLabel} disabled={disabled}>
+      <slot />
+    </button>
+  )
+}

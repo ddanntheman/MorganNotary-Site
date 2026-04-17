@@ -1,0 +1,55 @@
+---
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import { AREAS } from "@lib/areas";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  eyebrow?: string;
+  exclude?: string;
+}
+const {
+  title = "Richmond metro — I cover the map.",
+  eyebrow = "Service areas",
+  exclude,
+} = Astro.props;
+
+const items = AREAS.filter((a) => a.slug !== exclude);
+---
+
+<section id="service-areas" class="section bg-[color:var(--color-warm-gray)]">
+  <div class="container-brand">
+    <SectionHeader eyebrow={eyebrow}>
+      <h2 class="font-display text-3xl sm:text-4xl mb-3">{title}</h2>
+      <p class="text-[color:var(--color-text-secondary)] text-base max-w-2xl">
+        Based in Richmond. Regular rounds across Chesterfield, Henrico, and
+        Hanover. Travel fee is flat across the standard service area — no
+        surprises.
+      </p>
+    </SectionHeader>
+
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {
+        items.map((a) => (
+          <li>
+            <a
+              href={`/areas/${a.slug}`}
+              class="card h-full flex items-center gap-4 no-underline text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-warm-white)]"
+            >
+              <span class="inline-flex size-10 items-center justify-center rounded-full bg-[color:var(--color-plum)] text-white">
+                <Icon name="lucide:map-pin" class="size-5" />
+              </span>
+              <div class="flex-1 min-w-0">
+                <div class="font-medium text-base">{a.city}, VA</div>
+                <div class="text-xs text-[color:var(--color-text-secondary)] font-mono-brand uppercase tracking-wider">
+                  {a.county} · {a.driveTime}
+                </div>
+              </div>
+              <Icon name="lucide:arrow-right" class="size-4 text-[color:var(--color-plum)]" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

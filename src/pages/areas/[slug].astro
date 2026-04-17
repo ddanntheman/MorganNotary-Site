@@ -1,0 +1,140 @@
+---
+import { getCollection, render } from "astro:content";
+import AreasGrid from "@components/sections/AreasGrid.astro";
+import Breadcrumb from "@components/sections/Breadcrumb.astro";
+import CtaStrip from "@components/sections/CtaStrip.astro";
+import FaqAccordion from "@components/sections/FaqAccordion.astro";
+import Hero from "@components/sections/Hero.astro";
+import ServicesGrid from "@components/sections/ServicesGrid.astro";
+import TestimonialsStrip from "@components/sections/TestimonialsStrip.astro";
+import Card from "@components/ui/Card.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { breadcrumbJsonLd, serviceJsonLd } from "@lib/schema";
+import { absUrl, buildMeta } from "@lib/seo";
+import { Icon } from "astro-icon/components";
+
+export async function getStaticPaths() {
+  const areas = await getCollection("areas");
+  return areas.map((a) => ({ params: { slug: a.data.slug }, props: { entry: a } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const meta = buildMeta({
+  title: d.seo.title,
+  description: d.seo.description,
+  path: `/areas/${d.slug}`,
+});
+
+const canonical = absUrl(`/areas/${d.slug}`);
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: "Home", url: absUrl("/") },
+    { name: "Service areas", url: absUrl("/#service-areas") },
+    { name: `${d.city}, ${d.state}`, url: canonical },
+  ]),
+  serviceJsonLd({
+    name: `Mobile notary in ${d.city}, ${d.state}`,
+    description: d.seo.description,
+    url: canonical,
+    areaServed: [d.city],
+  }),
+];
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Breadcrumb
+    items={[
+      { name: "Home", url: "/" },
+      { name: "Service areas", url: "/#service-areas" },
+      { name: `${d.city}, ${d.state}`, url: `/areas/${d.slug}` },
+    ]}
+  />
+
+  <Hero
+    h1={d.h1}
+    subhead={d.heroBlurb}
+    ctaPrimary={{ label: "Book a signing", href: "/contact" }}
+    ctaSecondary={{ label: "See pricing", href: "/pricing" }}
+    variant="light"
+  />
+
+  <section class="section-tight">
+    <div class="container-brand grid lg:grid-cols-[2fr_1fr] gap-10 items-start">
+      <div class="prose-brand">
+        <h2>{d.localCallout.title}</h2>
+        <p>{d.localCallout.body}</p>
+        <ul class="flex flex-wrap gap-2 not-prose my-4">
+          {
+            d.localCallout.references.map((r: string) => (
+              <li class="pill bg-[color:var(--color-warm-gray)] text-[color:var(--color-text-secondary)]">
+                {r}
+              </li>
+            ))
+          }
+        </ul>
+        <h2>Neighborhoods covered</h2>
+        <ul>
+          {d.neighborhoodsCovered.map((n: string) => <li>{n}</li>)}
+        </ul>
+        <Content />
+      </div>
+
+      <aside class="space-y-4 lg:sticky lg:top-24">
+        <Card variant="warm">
+          <p class="eyebrow mb-2">Coverage at a glance</p>
+          <ul class="text-sm space-y-2">
+            <li class="flex items-center gap-2">
+              <Icon name="lucide:map-pin" class="size-4 text-[color:var(--color-plum)]" />
+              {d.county}, VA
+            </li>
+            <li class="flex items-center gap-2">
+              <Icon name="lucide:clock" class="size-4 text-[color:var(--color-plum)]" />
+              {d.driveTimeFromBase}
+            </li>
+            <li class="flex items-center gap-2">
+              <Icon name="lucide:shield-check" class="size-4 text-[color:var(--color-plum)]" />
+              Evenings &amp; weekends standard
+            </li>
+          </ul>
+        </Card>
+
+        <Card>
+          <p class="eyebrow mb-2">ZIP codes</p>
+          <div class="flex flex-wrap gap-1.5 text-xs">
+            {
+              d.zipCodes.map((z: string) => (
+                <span class="pill bg-[color:var(--color-navy-light)] text-[color:var(--color-navy)]">
+                  {z}
+                </span>
+              ))
+            }
+          </div>
+        </Card>
+      </aside>
+    </div>
+  </section>
+
+  <FaqAccordion
+    title={`Questions about ${d.city}`}
+    items={d.areaSpecificFaq.map((f: { question: string; answer: string }, i: number) => ({
+      id: String(i + 1),
+      question: f.question,
+      answer: f.answer,
+    }))}
+    idPrefix={`${d.slug}-faq`}
+  />
+
+  <ServicesGrid title={`What I do in ${d.city}`} eyebrow="Services" />
+
+  <TestimonialsStrip title="Client stories" />
+
+  <AreasGrid title="Other service areas" eyebrow="More around Richmond" exclude={d.slug} />
+
+  <CtaStrip
+    heading={`Need a notary in ${d.city} today?`}
+    body="Text me the address and the document type. I'll confirm within the hour."
+  />
+</BaseLayout>

@@ -1,0 +1,125 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import AreasGrid from "@components/sections/AreasGrid.astro";
+import CtaStrip from "@components/sections/CtaStrip.astro";
+import FaqAccordion from "@components/sections/FaqAccordion.astro";
+import Hero from "@components/sections/Hero.astro";
+import ServicesGrid from "@components/sections/ServicesGrid.astro";
+import TestimonialsStrip from "@components/sections/TestimonialsStrip.astro";
+import Card from "@components/ui/Card.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { faqJsonLd } from "@lib/schema";
+import { buildMeta } from "@lib/seo";
+import { Icon } from "astro-icon/components";
+
+const home = await getEntry("site", "home");
+if (!home) throw new Error("Missing site/home.mdx");
+const homeData = home.data;
+
+const faqs = await getCollection("faqItems", (f) => f.data.featured);
+const faqItems = faqs
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 6)
+  .map((f) => ({ id: f.data.id, question: f.data.question, answer: f.data.answer }));
+
+const meta = buildMeta({
+  title: homeData.seo.title,
+  description: homeData.seo.description,
+  path: "/",
+});
+
+const jsonLd = [faqJsonLd(faqItems)];
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Hero
+    h1={homeData.h1}
+    subhead={homeData.subhead}
+    ctaPrimary={homeData.ctaPrimary}
+    ctaSecondary={homeData.ctaSecondary}
+  />
+
+  <section class="section-tight bg-[color:var(--color-warm-gray)] border-y border-[color:var(--color-border)]">
+    <div class="container-brand grid sm:grid-cols-3 gap-6 text-center">
+      <div>
+        <Icon name="lucide:shield-check" class="size-6 mx-auto mb-2 text-[color:var(--color-plum)]" />
+        <p class="font-display text-xl">Licensed &amp; Insured</p>
+        <p class="eyebrow mt-1">VA-commissioned · NNA Certified</p>
+      </div>
+      <div>
+        <Icon name="lucide:clock" class="size-6 mx-auto mb-2 text-[color:var(--color-plum)]" />
+        <p class="font-display text-xl">Evenings &amp; Weekends</p>
+        <p class="eyebrow mt-1">Standard availability — no premium</p>
+      </div>
+      <div>
+        <Icon name="lucide:map-pin" class="size-6 mx-auto mb-2 text-[color:var(--color-plum)]" />
+        <p class="font-display text-xl">Mobile to You</p>
+        <p class="eyebrow mt-1">Richmond metro · 50-mile radius</p>
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid />
+
+  <section class="section bg-[color:var(--color-warm-gray)]">
+    <div class="container-brand grid lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <p class="eyebrow mb-3">Why Morgan</p>
+        <h2 class="font-display text-3xl sm:text-4xl mb-6">
+          Why I built this business — and what it means for you.
+        </h2>
+        <div class="prose-brand">
+          <p>
+            Morgan Danner, Notary isn't a side hustle. I got my Virginia
+            commission, my NNA certification, my E&amp;O insurance, and my
+            loan-signing training because I wanted to build something that's
+            actually mine — and where the quality of the experience is
+            entirely up to me.
+          </p>
+          <p>
+            Details are not optional. I come to you — your hospital room,
+            your office, your kitchen table. I bring everything I need,
+            including a witness if one is required. I pick up the phone.
+          </p>
+          <p>
+            <a href="/about">More about how I work →</a>
+          </p>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <Card>
+          <p class="eyebrow mb-2">Mobile</p>
+          <p class="font-display text-lg leading-snug">
+            I come to you — your home, office, hospital, or hospice.
+          </p>
+        </Card>
+        <Card>
+          <p class="eyebrow mb-2">Remote</p>
+          <p class="font-display text-lg leading-snug">
+            Virginia-authorized RON. Sign from anywhere in the state.
+          </p>
+        </Card>
+        <Card>
+          <p class="eyebrow mb-2">B2B rotation</p>
+          <p class="font-display text-lg leading-snug">
+            On Snapdocs, NotaryDash, SigningOrder, and more. Add me direct.
+          </p>
+        </Card>
+        <Card variant="dark">
+          <p class="eyebrow eyebrow-neon mb-2">The People's Rate</p>
+          <p class="font-display text-lg leading-snug text-white">
+            Community discount. Honor system. No documentation required.
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <AreasGrid />
+
+  <TestimonialsStrip />
+
+  <FaqAccordion items={faqItems} eyebrow="Frequently asked" title="Good questions. Straight answers." />
+
+  <CtaStrip />
+</BaseLayout>

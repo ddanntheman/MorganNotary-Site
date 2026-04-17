@@ -1,0 +1,75 @@
+---
+import { getEntry, render } from "astro:content";
+import ContactForm from "@components/forms/ContactForm";
+import BookingEmbed from "@components/sections/BookingEmbed.astro";
+import Breadcrumb from "@components/sections/Breadcrumb.astro";
+import Button from "@components/ui/Button.astro";
+import PhoneLink from "@components/ui/PhoneLink.astro";
+import ResponseTime from "@components/ui/ResponseTime.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { MAILTO_HREF, NAP, SMS_HREF, TEL_HREF } from "@lib/nap";
+import { breadcrumbJsonLd } from "@lib/schema";
+import { absUrl, buildMeta } from "@lib/seo";
+import { Icon } from "astro-icon/components";
+
+const entry = await getEntry("site", "contact");
+if (!entry) throw new Error("Missing site/contact.mdx");
+const { Content } = await render(entry);
+
+const initialMode = Astro.url.searchParams.get("mode") === "partner" ? "partner" : "client";
+
+const meta = buildMeta({
+  title: entry.data.seo.title,
+  description: entry.data.seo.description,
+  path: "/contact",
+});
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: "Home", url: absUrl("/") },
+    { name: "Contact", url: absUrl("/contact") },
+  ]),
+];
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Breadcrumb items={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]} />
+
+  <section class="section-tight">
+    <div class="container-brand grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
+      <div class="space-y-6">
+        <p class="eyebrow">Get in touch</p>
+        <h1 class="font-display text-4xl sm:text-5xl">{entry.data.h1}</h1>
+        <p class="text-lg text-[color:var(--color-text-secondary)]">{entry.data.subhead}</p>
+        <ResponseTime />
+
+        <div class="grid sm:grid-cols-2 gap-3 pt-4">
+          <Button variant="dark" href={TEL_HREF}>
+            <Icon name="lucide:phone" class="size-4" /> Call {NAP.phoneDisplay}
+          </Button>
+          <Button variant="secondary" href={SMS_HREF}>
+            <Icon name="lucide:message-circle" class="size-4" /> Text now
+          </Button>
+          <Button variant="ghost" href={MAILTO_HREF}>
+            <Icon name="lucide:mail" class="size-4" /> {NAP.email}
+          </Button>
+        </div>
+
+        <div class="prose-brand pt-4">
+          <Content />
+        </div>
+      </div>
+
+      <div>
+        <ContactForm
+          client:load
+          clientFormspreeId={NAP.integrations.formspreeClient}
+          partnerFormspreeId={NAP.integrations.formspreePartner}
+          initialMode={initialMode}
+        />
+      </div>
+    </div>
+  </section>
+
+  <BookingEmbed />
+</BaseLayout>

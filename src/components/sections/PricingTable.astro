@@ -1,0 +1,56 @@
+---
+interface Row {
+  label: string;
+  price: string;
+  includes?: string;
+}
+interface Props {
+  rows: Row[];
+  title?: string;
+  footnote?: string;
+}
+const {
+  rows,
+  title,
+  footnote = "Notarial acts billed at the Virginia statutory rate of $10 per act (Va. Code § 47.1-19). Package prices reflect travel, printing, scheduling, and witness coordination.",
+} = Astro.props;
+---
+
+<section class="section-tight">
+  <div class="container-brand max-w-4xl">
+    {title && <h2 class="font-display text-3xl mb-6">{title}</h2>}
+    <div class="card !p-0 overflow-hidden">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="bg-[color:var(--color-warm-gray)]">
+            <th class="px-5 py-3 text-xs font-mono-brand uppercase tracking-wider text-[color:var(--color-text-secondary)]">
+              Service
+            </th>
+            <th class="px-5 py-3 text-xs font-mono-brand uppercase tracking-wider text-[color:var(--color-text-secondary)] text-right">
+              Price
+            </th>
+            <th class="hidden md:table-cell px-5 py-3 text-xs font-mono-brand uppercase tracking-wider text-[color:var(--color-text-secondary)]">
+              Includes
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((r) => (
+              <tr class="border-t border-[color:var(--color-border)]">
+                <td class="px-5 py-4 font-medium">{r.label}</td>
+                <td class="px-5 py-4 text-right font-display text-2xl text-[color:var(--color-plum)]">
+                  {r.price}
+                </td>
+                <td class="hidden md:table-cell px-5 py-4 text-sm text-[color:var(--color-text-secondary)]">
+                  {r.includes}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-xs text-[color:var(--color-text-tertiary)]">{footnote}</p>
+  </div>
+</section>

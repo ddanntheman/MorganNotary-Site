@@ -1,0 +1,52 @@
+---
+import Button from "@components/ui/Button.astro";
+import { NAP, TEL_HREF } from "@lib/nap";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  eyebrow?: string;
+}
+const { title = "Book a time that works for you.", eyebrow = "Self-serve booking" } = Astro.props;
+
+const url = NAP.integrations.squareApptUrl;
+---
+
+<section class="section">
+  <div class="container-brand max-w-4xl">
+    <div class="mb-8">
+      {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
+      <h2 class="font-display text-3xl sm:text-4xl">{title}</h2>
+      <p class="text-[color:var(--color-text-secondary)] max-w-2xl mt-2">
+        Prefer to just pick a time? Use the booking widget below. For urgent
+        signings and anything outside standard hours, call or text directly — I
+        respond faster that way.
+      </p>
+    </div>
+
+    {
+      url ? (
+        <div class="aspect-[3/4] sm:aspect-[4/3] rounded-lg overflow-hidden border border-[color:var(--color-border)]">
+          <iframe
+            src={url}
+            title="Square Appointments booking widget"
+            loading="lazy"
+            class="w-full h-full border-0"
+            allow="payment"
+          />
+        </div>
+      ) : (
+        <div class="card card-dark flex flex-col items-start gap-4 p-8">
+          <p class="text-white/80 text-sm">
+            Self-serve booking is coming online shortly. In the meantime, the
+            fastest path is to call or text — I usually reply within the hour.
+          </p>
+          <Button variant="dark" href={TEL_HREF}>
+            <Icon name="lucide:phone" class="size-4" />
+            <span>{NAP.phoneDisplay}</span>
+          </Button>
+        </div>
+      )
+    }
+  </div>
+</section>

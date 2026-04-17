@@ -1,0 +1,17 @@
+{
+  "name": "Morgan Danner, Notary LLC",
+  "short_name": "Morgan Notary",
+  "description": "Richmond's boutique mobile notary — licensed, insured, and mobile to you.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F6",
+  "theme_color": "#5B2D82",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

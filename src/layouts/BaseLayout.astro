@@ -1,0 +1,36 @@
+---
+import "@styles/global.css";
+import Footer from "@components/layout/Footer.astro";
+import Header from "@components/layout/Header.astro";
+import BaseHead from "@components/seo/BaseHead.astro";
+import { localBusinessJsonLd, personJsonLd, websiteJsonLd } from "@lib/schema";
+import type { Meta } from "@lib/seo";
+
+interface Props {
+  meta: Meta;
+  jsonLd?: object[];
+  includeBaseSchema?: boolean;
+}
+
+const { meta, jsonLd = [], includeBaseSchema = true } = Astro.props;
+
+const allJsonLd = includeBaseSchema
+  ? [localBusinessJsonLd(), personJsonLd(), websiteJsonLd(), ...jsonLd]
+  : jsonLd;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <BaseHead meta={meta} jsonLd={allJsonLd} />
+    <slot name="head" />
+  </head>
+  <body class="min-h-full flex flex-col">
+    <a href="#main" class="skip-to-content">Skip to main content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,19 @@
+---
+type Variant = "default" | "dark" | "warm";
+interface Props {
+  variant?: Variant;
+  class?: string;
+  as?: "div" | "article" | "section" | "li";
+}
+const { variant = "default", class: className = "", as: Tag = "div" } = Astro.props as Props;
+const variants: Record<Variant, string> = {
+  default: "card",
+  dark: "card card-dark",
+  warm: "card bg-[color:var(--color-warm-gray)]",
+};
+const variantClass = variants[variant as Variant];
+---
+
+<Tag class={`${variantClass} ${className}`}>
+  <slot />
+</Tag>

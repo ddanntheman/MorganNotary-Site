@@ -1,0 +1,171 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Breadcrumb from "@components/sections/Breadcrumb.astro";
+import CtaStrip from "@components/sections/CtaStrip.astro";
+import Hero from "@components/sections/Hero.astro";
+import PricingTable from "@components/sections/PricingTable.astro";
+import ProcessSteps from "@components/sections/ProcessSteps.astro";
+import ServicesGrid from "@components/sections/ServicesGrid.astro";
+import TestimonialsStrip from "@components/sections/TestimonialsStrip.astro";
+import Card from "@components/ui/Card.astro";
+import PullQuote from "@components/ui/PullQuote.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { breadcrumbJsonLd, serviceJsonLd } from "@lib/schema";
+import { absUrl, buildMeta } from "@lib/seo";
+import { Icon } from "astro-icon/components";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  return services.map((s) => ({ params: { slug: s.data.slug }, props: { entry: s } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const faqs = await getCollection("faqItems", (f) =>
+  d.relatedFaqTopics.some((t: string) => f.data.topics.includes(t as never)),
+);
+const relatedFaqs = faqs.sort((a, b) => a.data.order - b.data.order).slice(0, 5);
+
+const meta = buildMeta({
+  title: d.seo.title,
+  description: d.seo.description,
+  path: `/services/${d.slug}`,
+});
+
+const canonical = absUrl(`/services/${d.slug}`);
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: "Home", url: absUrl("/") },
+    { name: "Services", url: absUrl("/#services") },
+    { name: d.name, url: canonical },
+  ]),
+  serviceJsonLd({
+    name: d.name,
+    description: d.seo.description,
+    url: canonical,
+    price: d.pricing?.[0]?.price?.replace(/[^\d.]/g, ""),
+  }),
+];
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Breadcrumb
+    items={[
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/#services" },
+      { name: d.name, url: `/services/${d.slug}` },
+    ]}
+  />
+
+  <Hero
+    h1={d.h1}
+    subhead={d.subhead}
+    ctaPrimary={{ label: "Book this service", href: "/contact" }}
+    ctaSecondary={{ label: "See pricing", href: "/pricing" }}
+    variant="light"
+  />
+
+  <section class="section-tight">
+    <div class="container-brand grid lg:grid-cols-[2fr_1fr] gap-10 items-start">
+      <div class="prose-brand">
+        <h2>For individuals &amp; families</h2>
+        <p>{d.consumerCopy}</p>
+        {d.b2bCopy && (
+          <>
+            <h2>For title companies, lenders &amp; attorneys</h2>
+            <p>{d.b2bCopy}</p>
+          </>
+        )}
+        {d.pullQuote && (
+          <PullQuote attribution={d.pullQuote.attribution}>{d.pullQuote.text}</PullQuote>
+        )}
+        <Content />
+      </div>
+
+      <aside class="space-y-4 lg:sticky lg:top-24">
+        <Card variant="warm">
+          <p class="eyebrow mb-2">At a glance</p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2">
+              <Icon name="lucide:check" class="size-4 text-[color:var(--color-emerald)]" />
+              VA-commissioned notary public
+            </li>
+            <li class="flex items-center gap-2">
+              <Icon name="lucide:check" class="size-4 text-[color:var(--color-emerald)]" />
+              NNA Certified Signing Agent
+            </li>
+            <li class="flex items-center gap-2">
+              <Icon name="lucide:check" class="size-4 text-[color:var(--color-emerald)]" />
+              E&amp;O insured, annual background screen
+            </li>
+            <li class="flex items-center gap-2">
+              <Icon name="lucide:check" class="size-4 text-[color:var(--color-emerald)]" />
+              Evening &amp; weekend availability standard
+            </li>
+          </ul>
+        </Card>
+
+        {d.platforms && d.platforms.length > 0 && (
+          <Card>
+            <p class="eyebrow mb-2">Signing platforms</p>
+            <ul class="flex flex-wrap gap-2 text-xs">
+              {d.platforms.map((p: string) => (
+                <li class="pill bg-[color:var(--color-warm-gray)] text-[color:var(--color-text-secondary)]">
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </Card>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  {d.pricing && d.pricing.length > 0 && (
+    <PricingTable title={`${d.shortName} pricing`} rows={d.pricing} />
+  )}
+
+  {d.process && d.process.length > 0 && (
+    <ProcessSteps eyebrow="How it works" heading="Step by step." steps={d.process} />
+  )}
+
+  {relatedFaqs.length > 0 && (
+    <section class="section-tight">
+      <div class="container-brand max-w-3xl">
+        <p class="eyebrow mb-3">Common questions</p>
+        <h2 class="font-display text-3xl mb-6">People ask me this all the time.</h2>
+        <ul class="divide-y divide-[color:var(--color-border)] border-y border-[color:var(--color-border)]">
+          {relatedFaqs.map((f) => (
+            <li>
+              <details class="group py-4">
+                <summary class="font-display text-lg cursor-pointer list-none flex items-center justify-between gap-4">
+                  <span>{f.data.question}</span>
+                  <span
+                    class="inline-flex size-8 items-center justify-center rounded-full bg-[color:var(--color-plum-light)] text-[color:var(--color-plum)] transition-transform group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div class="prose-brand mt-3 text-[color:var(--color-text-secondary)]">
+                  <p>{f.data.answer}</p>
+                </div>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <TestimonialsStrip
+    title="What Richmond is saying."
+    filter={(t: CollectionEntry<"testimonials">) => t.data.service === d.slug || t.data.service === "general"}
+  />
+
+  <ServicesGrid title="Other services" eyebrow="Explore more" exclude={d.slug} />
+
+  <CtaStrip />
+</BaseLayout>

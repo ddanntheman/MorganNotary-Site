@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from "astro:content";
+import Breadcrumb from "@components/sections/Breadcrumb.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@lib/schema";
+import { absUrl, buildMeta } from "@lib/seo";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("site", (p) => p.data.pageType === "legal");
+  return pages.map((p) => {
+    const slug = p.id.replace(/^legal\//, "").replace(/\.mdx$/, "");
+    return { params: { slug }, props: { entry: p, slug } };
+  });
+}
+
+const { entry, slug } = Astro.props;
+const { Content } = await render(entry);
+
+const meta = buildMeta({
+  title: entry.data.seo.title,
+  description: entry.data.seo.description,
+  path: `/legal/${slug}`,
+  noindex: entry.data.seo.noindex,
+});
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: "Home", url: absUrl("/") },
+    { name: entry.data.h1, url: absUrl(`/legal/${slug}`) },
+  ]),
+];
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Breadcrumb
+    items={[
+      { name: "Home", url: "/" },
+      { name: entry.data.h1, url: `/legal/${slug}` },
+    ]}
+  />
+
+  <article class="section-tight">
+    <div class="container-brand max-w-3xl">
+      <h1 class="font-display text-4xl sm:text-5xl mb-8">{entry.data.h1}</h1>
+      <div class="prose-brand">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,64 @@
+---
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import { SERVICES } from "@lib/services";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  eyebrow?: string;
+  limit?: number;
+  exclude?: string;
+}
+const {
+  title = "Whatever needs signing, I handle it.",
+  eyebrow = "Services",
+  limit,
+  exclude,
+} = Astro.props;
+
+const items = SERVICES.filter((s) => s.slug !== exclude).slice(0, limit);
+---
+
+<section id="services" class="section">
+  <div class="container-brand">
+    <SectionHeader eyebrow={eyebrow}>
+      <h2 class="font-display text-3xl sm:text-4xl mb-3">{title}</h2>
+      <p class="text-[color:var(--color-text-secondary)] text-base max-w-2xl">
+        From home closings to hospital bedsides — mobile, remote, or in-person.
+        Pricing is posted. Travel fee is flat. No surprises.
+      </p>
+    </SectionHeader>
+
+    <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        items.map((s) => (
+          <li>
+            <a
+              href={`/services/${s.slug}`}
+              class="card h-full flex flex-col gap-4 no-underline text-[color:var(--color-text-primary)] transition-shadow hover:shadow-[var(--shadow-lg)]"
+            >
+              <div class="flex items-start justify-between">
+                <span class="inline-flex size-12 items-center justify-center rounded-xl bg-[color:var(--color-plum-light)] text-[color:var(--color-plum)]">
+                  <Icon name={`lucide:${s.icon}`} class="size-6" />
+                </span>
+                {s.b2b && (
+                  <span class="pill bg-[color:var(--color-navy-light)] text-[color:var(--color-navy)]">
+                    B2B
+                  </span>
+                )}
+              </div>
+              <div>
+                <h3 class="font-display text-2xl mb-1">{s.name}</h3>
+                <p class="text-[color:var(--color-text-secondary)]">{s.tagline}</p>
+              </div>
+              <span class="mt-auto inline-flex items-center gap-2 text-sm text-[color:var(--color-plum)] font-medium">
+                Learn more
+                <Icon name="lucide:arrow-right" class="size-4" />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

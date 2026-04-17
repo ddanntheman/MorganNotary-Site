@@ -1,0 +1,40 @@
+---
+import { NAP, SMS_HREF, TEL_HREF } from "@lib/nap";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  type?: "tel" | "sms" | "both";
+  variant?: "inline" | "primary" | "dark";
+  label?: string;
+  class?: string;
+}
+const { type = "tel", variant = "inline", label, class: className = "" } = Astro.props;
+
+const href = type === "sms" ? SMS_HREF : TEL_HREF;
+const text = label ?? NAP.phoneDisplay;
+const iconName = type === "sms" ? "lucide:message-circle" : "lucide:phone";
+
+const variantClasses = {
+  inline:
+    "inline-flex items-center gap-2 font-mono-brand text-[color:var(--color-plum)] no-underline hover:underline",
+  primary: "btn btn-primary",
+  dark: "btn btn-dark",
+};
+---
+
+<a href={href} class={`${variantClasses[variant]} ${className}`} data-phone>
+  <Icon name={iconName} class="size-4" aria-hidden="true" />
+  <span>{text}</span>
+</a>
+{
+  type === "both" && (
+    <a
+      href={SMS_HREF}
+      class={`${variantClasses[variant]} ${className} ml-2`}
+      aria-label="Send text message"
+    >
+      <Icon name="lucide:message-circle" class="size-4" aria-hidden="true" />
+      <span>Text</span>
+    </a>
+  )
+}

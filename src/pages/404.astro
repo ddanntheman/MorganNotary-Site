@@ -1,0 +1,31 @@
+---
+import Button from "@components/ui/Button.astro";
+import PhoneLink from "@components/ui/PhoneLink.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { buildMeta } from "@lib/seo";
+
+const meta = buildMeta({
+  title: "Page not found",
+  description: "We couldn't find that page. Here's the quickest way back.",
+  path: "/404",
+  noindex: true,
+});
+---
+
+<BaseLayout meta={meta} includeBaseSchema={false}>
+  <section class="section">
+    <div class="container-brand max-w-2xl text-center space-y-6">
+      <p class="eyebrow">404</p>
+      <h1 class="font-display text-5xl">That page ran off with a pen.</h1>
+      <p class="text-[color:var(--color-text-secondary)]">
+        The page you were looking for isn't here. If you meant to book a
+        signing or ask a question, the fastest paths are below.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <Button variant="primary" href="/contact">Book a signing</Button>
+        <Button variant="secondary" href="/">Back to home</Button>
+        <PhoneLink type="tel" variant="dark" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

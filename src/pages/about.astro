@@ -1,0 +1,53 @@
+---
+import { getEntry, render } from "astro:content";
+import Breadcrumb from "@components/sections/Breadcrumb.astro";
+import CtaStrip from "@components/sections/CtaStrip.astro";
+import Hero from "@components/sections/Hero.astro";
+import TestimonialsStrip from "@components/sections/TestimonialsStrip.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { breadcrumbJsonLd } from "@lib/schema";
+import { absUrl, buildMeta } from "@lib/seo";
+
+const entry = await getEntry("site", "about");
+if (!entry) throw new Error("Missing site/about.mdx");
+const { Content } = await render(entry);
+
+const meta = buildMeta({
+  title: entry.data.seo.title,
+  description: entry.data.seo.description,
+  path: "/about",
+  type: "profile",
+});
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: "Home", url: absUrl("/") },
+    { name: "About", url: absUrl("/about") },
+  ]),
+];
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Breadcrumb items={[{ name: "Home", url: "/" }, { name: "About", url: "/about" }]} />
+  <Hero
+    h1={entry.data.h1}
+    subhead={entry.data.subhead}
+    ctaPrimary={entry.data.ctaPrimary}
+    variant="light"
+  />
+
+  <section class="section">
+    <div class="container-brand max-w-3xl">
+      <article class="prose-brand">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <TestimonialsStrip title="In Morgan's clients' words." />
+
+  <CtaStrip
+    heading="Ready to work together?"
+    body="I'll confirm availability within the hour. Same-day is often possible."
+  />
+</BaseLayout>

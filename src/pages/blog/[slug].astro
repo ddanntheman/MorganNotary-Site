@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from "astro:content";
+import Breadcrumb from "@components/sections/Breadcrumb.astro";
+import CtaStrip from "@components/sections/CtaStrip.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { articleJsonLd, breadcrumbJsonLd } from "@lib/schema";
+import { absUrl, buildMeta } from "@lib/seo";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", (p) => !p.data.draft);
+  return posts.map((p) => ({ params: { slug: p.data.slug }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const meta = buildMeta({
+  title: d.title,
+  description: d.description,
+  path: `/blog/${d.slug}`,
+  type: "article",
+});
+
+const url = absUrl(`/blog/${d.slug}`);
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: "Home", url: absUrl("/") },
+    { name: "Blog", url: absUrl("/blog") },
+    { name: d.title, url },
+  ]),
+  articleJsonLd({
+    title: d.title,
+    description: d.description,
+    url,
+    image: d.heroImage,
+    datePublished: d.publishDate.toISOString(),
+    dateModified: (d.updatedDate ?? d.publishDate).toISOString(),
+  }),
+];
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Breadcrumb
+    items={[
+      { name: "Home", url: "/" },
+      { name: "Blog", url: "/blog" },
+      { name: d.title, url: `/blog/${d.slug}` },
+    ]}
+  />
+
+  <article class="section-tight">
+    <div class="container-brand max-w-3xl">
+      <p class="eyebrow mb-3">
+        {formatter.format(d.publishDate)} · by {d.author} · {d.readingTime ?? "Read"}
+      </p>
+      <h1 class="font-display text-4xl sm:text-5xl leading-[1.05] mb-3">{d.title}</h1>
+      <p class="text-lg text-[color:var(--color-text-secondary)]">{d.description}</p>
+    </div>
+    <div class="container-brand max-w-3xl mt-10">
+      <div class="prose-brand">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CtaStrip
+    heading="Ready when you are."
+    body="Text or call — I respond fast. Book online for self-serve times."
+  />
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  tone?: "info" | "warn" | "error" | "success";
+  title?: string;
+  icon?: string;
+  class?: string;
+}
+const { tone = "info", title, icon, class: className = "" } = Astro.props;
+
+const tones = {
+  info: "bg-[color:var(--color-navy-light)] border-[color:var(--color-navy)] text-[color:var(--color-navy)]",
+  warn: "bg-[color:var(--color-gold-light)] border-[color:var(--color-gold)] text-[color:var(--color-gold)]",
+  error:
+    "bg-[color:var(--color-red-light)] border-[color:var(--color-red)] text-[color:var(--color-red)]",
+  success:
+    "bg-[color:var(--color-emerald-light)] border-[color:var(--color-emerald)] text-[color:var(--color-emerald)]",
+};
+
+const defaultIcon = {
+  info: "lucide:shield-check",
+  warn: "lucide:shield-check",
+  error: "lucide:x",
+  success: "lucide:check",
+}[tone];
+---
+
+<div
+  role="note"
+  class={`border-l-4 rounded-md p-4 flex gap-3 ${tones[tone]} ${className}`}
+>
+  <Icon name={icon ?? defaultIcon} class="size-5 shrink-0 mt-0.5" />
+  <div class="space-y-1 text-sm text-[color:var(--color-text-primary)]">
+    {title && <div class="font-semibold">{title}</div>}
+    <div class="prose-brand max-w-none"><slot /></div>
+  </div>
+</div>

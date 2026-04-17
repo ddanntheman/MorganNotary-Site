@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Card from "@components/ui/Card.astro";
+import SectionHeader from "@components/ui/SectionHeader.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  eyebrow?: string;
+  filter?: (t: { data: { service: string } }) => boolean;
+  limit?: number;
+}
+const {
+  title = "What Richmond is saying.",
+  eyebrow = "Client stories",
+  filter,
+  limit = 3,
+} = Astro.props;
+
+const all = await getCollection("testimonials");
+const items = (filter ? all.filter((t) => filter(t)) : all).slice(0, limit);
+---
+
+<section class="section">
+  <div class="container-brand">
+    <SectionHeader eyebrow={eyebrow}>
+      <h2 class="font-display text-3xl sm:text-4xl mb-3">{title}</h2>
+      <p class="text-[color:var(--color-text-secondary)] max-w-2xl text-sm italic">
+        At launch, these are composite stories representative of the kind of
+        work I do. Real, named reviews will replace them as clients opt in.
+      </p>
+    </SectionHeader>
+
+    <ul class="mt-8 grid gap-5 lg:grid-cols-3">
+      {
+        items.map((t) => (
+          <li>
+            <Card>
+              <div
+                class="flex gap-1 text-[color:var(--color-gold)] mb-3"
+                aria-label={`Rated ${t.data.rating} out of 5`}
+              >
+                {Array.from({ length: t.data.rating }).map(() => (
+                  <Icon name="lucide:star" class="size-4" />
+                ))}
+              </div>
+              <blockquote class="font-display text-xl leading-snug italic text-[color:var(--color-text-primary)]">
+                "{t.data.quote}"
+              </blockquote>
+              <figcaption class="mt-4 text-sm text-[color:var(--color-text-secondary)]">
+                <span class="font-medium text-[color:var(--color-text-primary)]">
+                  {t.data.author}
+                </span>
+                <span class="eyebrow ml-2">{t.data.city}, VA</span>
+              </figcaption>
+            </Card>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

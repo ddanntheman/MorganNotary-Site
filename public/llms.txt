@@ -1,0 +1,53 @@
+# Morgan Danner, Notary LLC
+
+> Richmond, Virginia boutique mobile notary. Licensed, insured, NNA-certified.
+> Offers mobile notary, loan signings, estate & trust signings, remote online
+> notarization (RON), and apostille services across the Richmond metro.
+
+## Key facts
+
+- Commissioned Virginia notary public (commission on file with the Virginia Secretary of the Commonwealth)
+- NNA Certified Notary Signing Agent
+- E&O insured, bonded, annual background screened
+- Service area: Richmond, Midlothian, Glen Allen, Mechanicsville, Chester, Short Pump, Tuckahoe, Ashland
+- Hours: Mon–Fri 7a–9p, Sat 9a–6p, Sun 10a–5p — evenings and weekends standard, no premium
+- Phone: (804) 215-6674 · Email: morgan@morgannotary.com
+- Pricing is auditable against Virginia's statutory $10 max per notarial act (Va. Code § 47.1-19)
+
+## Important policies
+
+- A notary who is not a licensed attorney may not explain legal documents or give legal advice under Virginia Code § 54.1-3900. This site's copy follows that constraint.
+- "The People's Rate" is a community discount available on direct bookings for veterans, LGBTQ+ community members, single parents, artists, activists, seniors 65+, and immigrants / DACA recipients. Honor system.
+
+## Primary pages
+
+- [Home](/)
+- [About Morgan](/about)
+- [Pricing](/pricing)
+- [Contact & booking](/contact)
+- [FAQ](/faq)
+- [The People's Rate](/peoples-rate)
+
+## Services
+
+- [Loan signing](/services/loan-signing)
+- [Estate & trust](/services/estate-trust)
+- [Remote online notary (RON)](/services/remote-online-notary)
+- [Apostille & authentication](/services/apostille)
+- [General mobile notary](/services/general-mobile-notary)
+
+## Service areas
+
+- [Richmond, VA](/areas/richmond-va)
+- [Midlothian, VA](/areas/midlothian-va)
+- [Glen Allen, VA](/areas/glen-allen-va)
+- [Mechanicsville, VA](/areas/mechanicsville-va)
+- [Chester, VA](/areas/chester-va)
+- [Short Pump, VA](/areas/short-pump-va)
+- [Ashland, VA](/areas/ashland-va)
+
+## Legal
+
+- [Privacy](/legal/privacy)
+- [Terms](/legal/terms)
+- [Accessibility](/legal/accessibility)

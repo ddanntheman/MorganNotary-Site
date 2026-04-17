@@ -1,0 +1,80 @@
+---
+import Button from "@components/ui/Button.astro";
+import CredentialRow from "@components/ui/CredentialRow.astro";
+import ResponseTime from "@components/ui/ResponseTime.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  eyebrow?: string;
+  h1: string;
+  subhead?: string;
+  ctaPrimary?: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
+  variant?: "dark" | "light";
+}
+const {
+  eyebrow = "Richmond, VA · Licensed · Insured · NNA Member",
+  h1,
+  subhead,
+  ctaPrimary,
+  ctaSecondary,
+  variant = "dark",
+} = Astro.props;
+
+const isDark = variant === "dark";
+---
+
+<section
+  class:list={[
+    "relative overflow-hidden",
+    isDark ? "bg-[color:var(--color-charcoal)]" : "bg-[color:var(--color-warm-white)]",
+  ]}
+>
+  <div class="container-brand section grid lg:grid-cols-[1.2fr_1fr] gap-10 items-center">
+    <div class="space-y-6 lg:max-w-2xl">
+      <CredentialRow />
+      <h1
+        class:list={[
+          "font-display text-4xl sm:text-5xl lg:text-6xl",
+          isDark ? "text-white" : "text-[color:var(--color-text-primary)]",
+        ]}
+        style="font-weight: 500; letter-spacing: -0.01em; line-height: 1.05;"
+      >
+        {h1}
+      </h1>
+      {
+        subhead && (
+          <p
+            class:list={[
+              "text-lg max-w-xl",
+              isDark ? "text-white/80" : "text-[color:var(--color-text-secondary)]",
+            ]}
+          >
+            {subhead}
+          </p>
+        )
+      }
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        {ctaPrimary && <Button variant="primary" href={ctaPrimary.href}>{ctaPrimary.label}<Icon name="lucide:arrow-right" class="size-4" /></Button>}
+        {ctaSecondary && <Button variant={isDark ? "dark" : "secondary"} href={ctaSecondary.href}>{ctaSecondary.label}</Button>}
+        <ResponseTime />
+      </div>
+    </div>
+
+    <div class="hidden lg:block">
+      <slot name="aside">
+        <div class="aspect-[4/5] rounded-[20px] border border-white/10 bg-gradient-to-br from-[color:var(--color-plum)] to-[color:var(--color-navy)] p-6 relative overflow-hidden">
+          <div class="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_30%_20%,white,transparent_50%)]"></div>
+          <div class="relative h-full flex flex-col justify-end">
+            <p class="font-display text-white text-3xl leading-tight">
+              Mobile. Remote. Apostille.
+            </p>
+            <p class="mt-2 eyebrow text-[color:var(--color-neon)]">
+              Evenings · Weekends · Same-day
+            </p>
+          </div>
+        </div>
+      </slot>
+    </div>
+  </div>
+</section>

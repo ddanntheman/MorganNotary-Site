@@ -1,0 +1,30 @@
+# build
+dist/
+.astro/
+.vercel/
+_assets/
+
+# deps
+node_modules/
+.pnpm-store/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# editor
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# logs
+npm-debug.log*
+pnpm-debug.log*
+*.log
+
+# misc
+coverage/
+.cache/
+.turbo/

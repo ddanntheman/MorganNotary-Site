@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morgan Danner, Notary — Brand & Site Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #5B2D82;
+    --plum-light: #F0E8F8;
+    --plum-mid: #8B4DBF;
+    --emerald: #1B6B4A;
+    --emerald-light: #E8F5EE;
+    --navy: #243B6E;
+    --navy-light: #E8EDF6;
+    --gold: #C17D2A;
+    --gold-light: #FDF3E3;
+    --neon: #C8F53A;
+    --charcoal: #2A2825;
+    --warm-white: #FAF9F6;
+    --warm-gray: #F5F3EF;
+    --border: #E2DDD8;
+    --text-primary: #1C1A18;
+    --text-secondary: #6B6560;
+    --text-tertiary: #9E9890;
+    --teal: #0F6E7A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--text-primary); display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 260px; min-width: 260px; background: var(--charcoal);
+    position: fixed; top: 0; left: 0; height: 100vh;
+    overflow-y: auto; z-index: 100; padding: 0 0 2rem;
+  }
+  .sidebar-logo {
+    padding: 1.5rem 1.25rem 1.25rem;
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .sidebar-logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 500; color: var(--warm-white);
+    line-height: 1.3;
+  }
+  .sidebar-logo-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; color: var(--neon); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-top: 4px;
+  }
+  .sidebar-section { padding: 1.25rem 1.25rem 0.5rem; }
+  .sidebar-section-label {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+    margin-bottom: 6px;
+  }
+  .sidebar-link {
+    display: block; padding: 5px 8px; border-radius: 5px;
+    font-size: 12px; color: rgba(255,255,255,0.65);
+    text-decoration: none; transition: all 0.15s;
+    margin-bottom: 1px;
+  }
+  .sidebar-link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .sidebar-link.active { background: var(--plum); color: #fff; }
+
+  /* Main content */
+  .main { margin-left: 260px; flex: 1; padding: 0; }
+
+  /* Hero */
+  .hero {
+    background: var(--charcoal); padding: 4rem 3rem;
+    border-bottom: 3px solid var(--neon);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 300px; height: 100%; opacity: 0.04;
+    background: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--neon); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 48px;
+    font-weight: 500; color: var(--warm-white); line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 560px; }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+  .hero-chip {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    font-weight: 500; padding: 4px 12px; border-radius: 20px;
+    border: 0.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  /* Section */
+  .section { padding: 3rem; border-bottom: 0.5px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 32px;
+    font-weight: 500; color: var(--text-primary); line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .section-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem; max-width: 640px; }
+
+  /* Cards */
+  .card {
+    background: #fff; border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 1.5rem; margin-bottom: 12px;
+  }
+  .card-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px;
+  }
+  .card-text { font-size: 14px; color: var(--text-primary); line-height: 1.8; }
+  .card-note { font-size: 12px; color: var(--text-tertiary); margin-top: 10px; font-style: italic; }
+
+  /* Color palette */
+  .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 2rem; }
+  .swatch { border-radius: 10px; overflow: hidden; }
+  .swatch-color { height: 64px; }
+  .swatch-info { padding: 8px 2px 0; }
+  .swatch-name { font-size: 12px; font-weight: 500; color: var(--text-primary); }
+  .swatch-hex { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-tertiary); }
+  .swatch-role { font-size: 10px; color: var(--text-tertiary); margin-top: 2px; }
+
+  /* Font samples */
+  .font-sample {
+    background: #fff; border: 0.5px solid var(--border); border-radius: 12px;
+    padding: 1.5rem; margin-bottom: 12px;
+  }
+  .font-sample-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 12px;
+  }
+  .font-display { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--text-primary); line-height: 1.3; }
+  .font-body { font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-top: 8px; }
+  .font-mono-sample { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--neon); letter-spacing: 0.08em; margin-top: 8px; }
+  .font-dark { background: var(--charcoal); border-color: transparent; }
+
+  /* Voice cards */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+  .voice-card { border-radius: 10px; padding: 1.25rem; }
+  .voice-card.b2b { background: var(--plum-light); }
+  .voice-card.b2c { background: var(--emerald-light); }
+  .voice-card-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .voice-card.b2b .voice-card-label { color: var(--plum); }
+  .voice-card.b2c .voice-card-label { color: var(--emerald); }
+  .voice-example { font-size: 13px; color: var(--text-primary); line-height: 1.6; font-style: italic; padding: 8px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  .voice-example:last-child { border-bottom: none; padding-bottom: 0; }
+
+  /* Page sections */
+  .page-header {
+    background: var(--charcoal); border-radius: 12px;
+    padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .page-header-left { display: flex; flex-direction: column; gap: 3px; }
+  .page-header-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--neon); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-header-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--warm-white); }
+  .page-header-url { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  /* Copy blocks */
+  .copy-block { background: var(--warm-gray); border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 10px; }
+  .copy-block-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
+  .copy-block-text { font-size: 14px; color: var(--text-primary); line-height: 1.8; white-space: pre-wrap; }
+  .copy-block-note { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; font-style: italic; }
+
+  /* SEO block */
+  .seo-block { background: #fff; border: 0.5px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 10px; }
+  .seo-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+  .seo-row:last-child { margin-bottom: 0; }
+  .seo-key { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-tertiary); min-width: 90px; flex-shrink: 0; padding-top: 2px; }
+  .seo-val { font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+
+  /* Keywords */
+  .kw-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--warm-gray); border: 0.5px solid var(--border); color: var(--text-secondary); }
+
+  /* Email templates */
+  .email-card { background: #fff; border: 0.5px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+  .email-card-header { padding: 1rem 1.25rem; border-bottom: 0.5px solid var(--border); }
+  .email-type { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .email-meta-row { display: flex; gap: 8px; margin-bottom: 4px; }
+  .email-meta-key { font-size: 11px; color: var(--text-tertiary); min-width: 58px; }
+  .email-meta-val { font-size: 13px; color: var(--text-primary); font-weight: 500; }
+  .email-body { padding: 1.25rem; background: var(--warm-gray); }
+  .email-text { font-size: 13px; color: var(--text-primary); line-height: 1.8; white-space: pre-wrap; }
+  .email-note { font-size: 11px; color: var(--text-tertiary); font-style: italic; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--border); }
+
+  /* Pricing table */
+  .price-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .price-table th { text-align: left; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); padding: 0 0 10px; border-bottom: 0.5px solid var(--border); }
+  .price-table th:last-child { text-align: right; }
+  .price-table td { padding: 10px 0; border-bottom: 0.5px solid var(--border); color: var(--text-primary); vertical-align: top; line-height: 1.5; }
+  .price-table td:last-child { text-align: right; font-weight: 500; white-space: nowrap; padding-left: 12px; }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+  .price-cat { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); padding-top: 1.25rem !important; }
+
+  /* People's Rate */
+  .tier-card { border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
+  .tier-header { padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+  .tier-name { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 3px; }
+  .tier-groups { font-size: 12px; color: rgba(255,255,255,0.7); }
+  .tier-discount { font-size: 18px; font-weight: 500; color: #fff; text-align: right; }
+  .tier-discount-sub { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.65); }
+  .tier-body { padding: 1.25rem; background: #fff; border: 0.5px solid var(--border); border-top: none; }
+  .tier-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+  .tier-col-label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 4px; }
+  .tier-col-text { font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+
+  /* Rule list */
+  .rule-list { list-style: none; }
+  .rule-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--border); align-items: flex-start; }
+  .rule-item:last-child { border-bottom: none; }
+  .rule-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .rule-text { font-size: 13px; color: var(--text-primary); line-height: 1.6; }
+  .rule-text strong { font-weight: 500; }
+
+  /* Checklist */
+  .checklist { background: #fff; border: 0.5px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .checklist-section { margin-bottom: 1.5rem; }
+  .checklist-section:last-child { margin-bottom: 0; }
+  .checklist-section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; }
+  .check-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--border); align-items: flex-start; font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+  .check-item:last-child { border-bottom: none; }
+  .check-box { width: 16px; height: 16px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 1px; }
+  .check-urgent .check-box { border-color: #E24B4A; }
+  .check-urgent { color: var(--text-primary); }
+  .check-urgent .check-label-urgent { color: #A32D2D; font-size: 10px; font-weight: 500; margin-left: 4px; }
+
+  /* Pill tags */
+  .pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin: 2px 3px 2px 0; }
+  .pill-plum { background: var(--plum-light); color: var(--plum); }
+  .pill-green { background: var(--emerald-light); color: var(--emerald); }
+  .pill-navy { background: var(--navy-light); color: var(--navy); }
+  .pill-gold { background: var(--gold-light); color: var(--gold); }
+
+  /* Alert box */
+  .alert { border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start; }
+  .alert-warn { background: #FDF3E3; border: 0.5px solid #EF9F27; }
+  .alert-info { background: var(--plum-light); border: 0.5px solid var(--plum-mid); }
+  .alert-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .alert-text { font-size: 13px; line-height: 1.6; }
+  .alert-warn .alert-text { color: #633806; }
+  .alert-info .alert-text { color: var(--plum); }
+
+  /* Divider */
+  .divider { height: 0.5px; background: var(--border); margin: 2rem 0; }
+
+  /* Responsive sidebar toggle */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-name">Morgan Danner<br>Notary LLC</div>
+    <div class="sidebar-logo-sub">Brand &amp; Site Guide</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Brand System</div>
+    <a class="sidebar-link" href="#brand-overview">Overview</a>
+    <a class="sidebar-link" href="#palette">Color palette</a>
+    <a class="sidebar-link" href="#typography">Typography</a>
+    <a class="sidebar-link" href="#voice">Brand voice</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Website Pages</div>
+    <a class="sidebar-link" href="#home">Home page</a>
+    <a class="sidebar-link" href="#about">About page</a>
+    <a class="sidebar-link" href="#pricing">Pricing page</a>
+    <a class="sidebar-link" href="#loan-signing">Loan signing</a>
+    <a class="sidebar-link" href="#estate">Estate &amp; trust</a>
+    <a class="sidebar-link" href="#ron">Remote online notary</a>
+    <a class="sidebar-link" href="#apostille">Apostille</a>
+    <a class="sidebar-link" href="#faq">FAQ page</a>
+    <a class="sidebar-link" href="#contact">Contact / Book now</a>
+    <a class="sidebar-link" href="#service-areas">Service area pages ×7</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Programs &amp; Outreach</div>
+    <a class="sidebar-link" href="#peoples-rate">The People's Rate</a>
+    <a class="sidebar-link" href="#b2b">B2B outreach templates</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Launch</div>
+    <a class="sidebar-link" href="#checklist">Pre-launch checklist</a>
+    <a class="sidebar-link" href="#directories">Directory listings</a>
+  </div>
+</nav>
+
+<!-- Main content -->
+<main class="main">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-eyebrow">Brand &amp; Site Guide · v1.0 · Confidential</div>
+  <div class="hero-title">Morgan Danner,<br>Notary LLC</div>
+  <div class="hero-sub">Everything your developer needs to build the site — brand system, page copy, SEO metadata, pricing, outreach templates, and launch checklist. All in one place.</div>
+  <div class="hero-chips">
+    <span class="hero-chip">Richmond, VA</span>
+    <span class="hero-chip">Mobile · RON · NSA · Apostille</span>
+    <span class="hero-chip">React SPA</span>
+    <span class="hero-chip">Cormorant Garamond + DM Sans</span>
+    <span class="hero-chip">Jewel tones · Boutique · Community-first</span>
+  </div>
+</div>
+
+<!-- ==================== BRAND OVERVIEW ==================== -->
+<section class="section" id="brand-overview">
+  <div class="section-eyebrow">Brand System</div>
+  <div class="section-title">Brand overview</div>
+  <div class="section-sub">The emotional brief that drives every design and copy decision.</div>
+
+  <div class="card" style="background: var(--charcoal); border-color: transparent;">
+    <div class="card-label" style="color: var(--neon);">The vibe</div>
+    <div class="card-text" style="color: rgba(255,255,255,0.8); font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.7;">"Exposed brick walls with a neon sign. Coffee in a whimsical mug, surrounded by meticulously organized documents. Professional blazer with a beaded necklace made by my kid. Jewel tones. Botanical. Neon signs. Integrity. Intense attention to detail. Small business fondness. Richmond skyline. Boutique experience. Treat you like family. Mutual respect always."</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Tagline</div>
+    <div class="card-text" style="font-family: 'Cormorant Garamond', serif; font-size: 22px;">Richmond's boutique notary experience.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Hero headline (home page H1)</div>
+    <div class="card-text" style="font-family: 'Cormorant Garamond', serif; font-size: 22px;">The notary your attorney wishes you'd called sooner.</div>
+  </div>
+</section>
+
+<!-- ==================== PALETTE ==================== -->
+<section class="section" id="palette">
+  <div class="section-eyebrow">Brand System</div>
+  <div class="section-title">Color palette</div>
+  <div class="section-sub">Ten colors. Use plum as the primary anchor. Neon lime sparingly — it's the beaded necklace, not the blazer.</div>
+
+  <div class="palette-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#5B2D82;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Plum</div>
+        <div class="swatch-hex">#5B2D82</div>
+        <div class="swatch-role">Primary brand</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1B6B4A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Emerald</div>
+        <div class="swatch-hex">#1B6B4A</div>
+        <div class="swatch-role">Trust / growth</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#243B6E;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Cobalt navy</div>
+        <div class="swatch-hex">#243B6E</div>
+        <div class="swatch-role">Accent / depth</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#C17D2A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Warm gold</div>
+        <div class="swatch-hex">#C17D2A</div>
+        <div class="swatch-role">Highlight / CTA</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#C8F53A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Neon lime</div>
+        <div class="swatch-hex">#C8F53A</div>
+        <div class="swatch-role">Energy — use sparingly</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#2A2825;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Charcoal</div>
+        <div class="swatch-hex">#2A2825</div>
+        <div class="swatch-role">Dark surfaces / CTAs</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#E8F5EE; border: 0.5px solid #CBD5CE;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Sage mist</div>
+        <div class="swatch-hex">#E8F5EE</div>
+        <div class="swatch-role">Botanical bg</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F0E8F8; border: 0.5px solid #D5C8E2;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Lavender mist</div>
+        <div class="swatch-hex">#F0E8F8</div>
+        <div class="swatch-role">Card / section bg</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FAF9F6; border: 0.5px solid #E0DDD8;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Warm white</div>
+        <div class="swatch-hex">#FAF9F6</div>
+        <div class="swatch-role">Page background</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0F6E7A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Ink teal</div>
+        <div class="swatch-hex">#0F6E7A</div>
+        <div class="swatch-role">Digital accent</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TYPOGRAPHY ==================== -->
+<section class="section" id="typography">
+  <div class="section-eyebrow">Brand System</div>
+  <div class="section-title">Typography</div>
+  <div class="section-sub">Three Google Fonts. Each has a distinct job. Import all three.</div>
+
+  <div class="font-sample">
+    <div class="font-sample-label">Display / Headings — Cormorant Garamond</div>
+    <div class="font-display">Documents handled. Details obsessed. Richmond proud.</div>
+    <div class="font-body" style="font-size:13px; margin-top:12px;">Use for: H1, H2, hero taglines, pull quotes, page titles. Weight 500. Elegant, editorial, boutique-hotel energy.</div>
+  </div>
+
+  <div class="font-sample">
+    <div class="font-sample-label">Body / UI — DM Sans</div>
+    <div class="font-body" style="color: var(--text-primary); font-size:15px;">I come to you, handle the paperwork chaos, and make it easy. Evening and weekend availability. Same-day turnaround. Witnesses, printing, and delivery included.</div>
+    <div class="font-body" style="font-size:13px; margin-top:12px;">Use for: body copy, nav, buttons, service descriptions, all UI text. Weight 300/400/500. Clean, friendly, slightly informal.</div>
+  </div>
+
+  <div class="font-sample font-dark">
+    <div class="font-sample-label" style="color: rgba(255,255,255,0.4);">Accent / Labels — DM Mono</div>
+    <div class="font-mono-sample" style="font-size:13px;">RICHMOND, VA · LICENSED · INSURED · NNA MEMBER</div>
+    <div class="font-body" style="color: rgba(255,255,255,0.45); font-size:13px; margin-top:12px;">Use for: credential callouts, pricing labels, category tags, code-style data. On dark backgrounds only. The neon sign effect.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Type scale</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13px;color:var(--text-secondary);">
+      <div>H1: Cormorant 48–56px / 500<br>H2: Cormorant 36–42px / 500<br>H3: Cormorant 28px / 500<br>H4: DM Sans 18px / 500</div>
+      <div>Body large: DM Sans 16px / 400<br>Body: DM Sans 14px / 400<br>Small / labels: DM Sans 12px / 500<br>Mono labels: DM Mono 11px / 500</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VOICE ==================== -->
+<section class="section" id="voice">
+  <div class="section-eyebrow">Brand System</div>
+  <div class="section-title">Brand voice</div>
+  <div class="section-sub">Morgan has two modes. Both are authentic — she just calibrates to her audience. Neither is fake.</div>
+
+  <div class="voice-grid">
+    <div class="voice-card b2b">
+      <div class="voice-card-label">B2B mode — attorneys, title co's, RIAs</div>
+      <div class="voice-example">"I specialize in estate and trust signings with same-day availability. My clients are your clients — I protect that relationship."</div>
+      <div class="voice-example">"Credentialed, insured, and background-checked. I handle witnesses, printing, and delivery so your staff doesn't have to."</div>
+    </div>
+    <div class="voice-card b2c">
+      <div class="voice-card-label">B2C mode — families, buyers, seniors</div>
+      <div class="voice-example">"Listen — I will drive to you, print your docs, find a witness, and still have you done before dinner. Just call me."</div>
+      <div class="voice-example">"You don't have to figure out what you need. Tell me what's going on and I'll handle it."</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Voice rules</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13px;line-height:1.7;">
+      <div>
+        <div style="font-weight:500;color:var(--emerald);margin-bottom:6px;">✓ Do</div>
+        <div style="color:var(--text-secondary);">Short sentences with energy<br>Em dashes for punch<br>"I" not "we" — she's a person<br>Lead with the benefit<br>Occasional "listen" or "honestly"<br>Specific over vague, always</div>
+      </div>
+      <div>
+        <div style="font-weight:500;color:#A32D2D;margin-bottom:6px;">✗ Don't</div>
+        <div style="color:var(--text-secondary);">"Notarization solutions"<br>"We strive to provide"<br>"Your satisfaction is our priority"<br>Passive voice<br>Corporate filler<br>Re-explaining what a notary is</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-dot" style="background:var(--plum);"></div>
+    <div class="alert-text"><strong>UPL reminder:</strong> In Virginia, notaries cannot explain legal content, interpret document terms, or advise on whether terms are favorable. Copy should say "I'll direct you through every page" — not "I'll explain what you're signing." When in doubt, direct clients to their lender or attorney.</div>
+  </div>
+</section>
+
+<!-- ==================== HOME PAGE ==================== -->
+<section class="section" id="home">
+  <div class="section-eyebrow">Website Pages</div>
+  <div class="section-title">Home page</div>
+  <div class="section-sub">The first impression. Hero + social proof above the fold. Warm open, practical fast.</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 1</div>
+      <div class="page-header-name">Home</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/</div>
+  </div>
+
+  <div class="seo-block">
+    <div class="card-label">SEO Metadata</div>
+    <div class="seo-row"><div class="seo-key">Title tag</div><div class="seo-val">Mobile Notary Richmond VA | Morgan Danner, Notary</div></div>
+    <div class="seo-row"><div class="seo-key">Meta desc</div><div class="seo-val">Richmond's mobile notary — evenings, weekends, same-day. Loan signings, estate docs, RON, apostille. Witnesses & printing included. Call or text now.</div></div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">H1 Headline</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:24px;">The notary your attorney wishes you'd called sooner.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Subheadline</div>
+    <div class="copy-block-text">Mobile notary + loan signing agent serving Richmond and surrounding areas. I come to you — evenings, weekends, same day. Witnesses, printing, and delivery included. No drama.</div>
+  </div>
+
+  <div class="copy-block" style="background:var(--charcoal);">
+    <div class="copy-block-label" style="color:rgba(255,255,255,0.4);">CTA block (dark background)</div>
+    <div class="copy-block-text" style="color:var(--neon);font-family:'DM Mono',monospace;font-size:15px;">(804) 215-6674 — call or text</div>
+    <div style="margin-top:12px;display:inline-block;background:var(--plum);color:#fff;font-size:13px;font-weight:500;padding:10px 24px;border-radius:8px;">Book your signing</div>
+    <div class="copy-block-note" style="color:rgba(255,255,255,0.3);">Below button: "Usually responds within 1 hour."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Differentiator pills (below CTA)</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+      <span class="pill pill-plum">Evening & weekend availability</span>
+      <span class="pill pill-green">Same-day or next-day turnaround</span>
+      <span class="pill pill-navy">Witnesses, printing & delivery included</span>
+      <span class="pill pill-gold">Licensed · insured · NNA member</span>
+    </div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Services section headline</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:22px;">Whatever needs signing, I handle it.</div>
+    <div class="copy-block-note">Subhead: "From home closings to hospital bedsides — mobile, remote, or in-person. Here's what I do."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Why Morgan section headline</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:22px;">Not your average notary.</div>
+    <div class="copy-block-note">Subhead: "Here's what you actually get when you book with me."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">The People's Rate teaser</div>
+    <div class="copy-block-text">Veterans, LGBTQ+ community, single parents, artists, activists, seniors (65+), and immigrants — discounted travel and reduced notary fees when you book directly with me. The discount follows you, the signer — not whoever's making the call. Obviously I'm doing this. Why wouldn't I? Just mention it when you book.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Bottom CTA (dark background)</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:20px;">Ready to get it done? Let's make it easy.</div>
+    <div class="copy-block-note">Sub: "Call or text — I usually respond within the hour. Evening and weekend appointments available. Same-day when I can make it happen — which is most of the time."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">5 review composites (swap with real reviews as they come in)</div>
+    <div class="copy-block-text">"Morgan showed up on time, had everything printed, and walked my mom through every single page without making her feel rushed." — Diane T., Richmond · Estate signing
+
+"I needed a loan signing on a Friday evening and she made it happen. Professional, fast, and she brought a witness." — James R., Short Pump · Loan signing
+
+"I had no idea what an apostille even was. Morgan explained the whole process, handled everything, and kept me updated." — Camila V., Glen Allen · Apostille
+
+"She felt like a friend who really knew what she was doing. I was stressed about my refinance and she made it feel easy." — Marcus W., Midlothian · Refinance
+
+"As an estate planning attorney, I need a notary I can trust with my clients. Morgan is reliable, discreet, and handles sensitive signings with exactly the care they deserve." — Attorney, West End Richmond · Ongoing partner</div>
+    <div class="copy-block-note">The 5th review is intentionally B2B — keep at least one attorney/partner voice in the rotation for credibility with professional partners.</div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="section" id="about">
+  <div class="section-eyebrow">Website Pages</div>
+  <div class="section-title">About page</div>
+  <div class="section-sub">Heart first, credentials last. Not cringe. Exactly as written below.</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 2</div>
+      <div class="page-header-name">About Morgan</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/about</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">H1</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:24px;">Hi, I'm Morgan.<br>I built this for Richmond.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Opening subhead</div>
+    <div class="copy-block-text">Mobile notary. Loan signing agent. Mom. And the person who will absolutely drive to your house on a Tuesday night so you don't have to figure out where to get something notarized.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Origin story (section 1)</div>
+    <div class="copy-block-text">There came a point where I looked at my career and thought: I want something that's mine. Something I built. Something where the quality of the work — and the experience for the client — is entirely up to me.
+
+So I pivoted. I got my Virginia notary commission, my NNA certification, my E&O insurance. I trained as a loan signing agent and qualified for Remote Online Notarization. I did all of it intentionally, because if I was going to do this, I was going to do it right.
+
+Morgan Danner, Notary isn't a side hustle. It's a business I built from scratch, in a city I love, for people who deserve better than a rushed signature and a "good luck with that."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Pull quote</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;border-left:3px solid var(--plum);padding-left:16px;">"I wanted something that was mine — and I wanted it to actually mean something to the people I served."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">The mom part (section 2)</div>
+    <div class="copy-block-text">I'm also a mom. And that matters — not because I want you to feel sorry for me, but because it's exactly why I work the way I do.
+
+I know what it's like to have a packed schedule, a complicated life, and zero bandwidth for things that should be simple. I know what it's like to need something handled — correctly, quickly, without drama — so you can get back to the people who need you.
+
+That's what I'm here for. The beaded necklace my kid made me is usually right there next to the notary seal. That's just who I am.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Values section headline</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:22px;">Here's how I work.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Five values (bullet list)</div>
+    <div class="copy-block-text">1. Details are not optional. I check everything. Then I check it again. A missed signature or incorrect acknowledgment can hold up a closing or invalidate a document. That doesn't happen on my watch.
+
+2. I come to you. Your hospital room, your office, your kitchen table. I bring everything — including a witness if you need one. You have enough to deal with.
+
+3. Mutual respect, always. I don't care if you're signing a trust at 80 or a lease at 22. You get the same care, the same patience, and the same thorough explanation of every page. Every time.
+
+4. Richmond is not just my market. It's my community. That's why I offer The People's Rate — discounted travel and reduced notary fees for veterans, LGBTQ+ folks, single parents, seniors, artists, activists, and immigrants who book directly with me. The discount follows you, the signer. Obviously I'm doing this. Why wouldn't I?
+
+5. I pick up the phone. Call me, text me. Real response times. No autoresponder telling you to fill out a form. Just me, actually available.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Closing CTA</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:20px;">Nice to meet you. Now let's get something done.</div>
+    <div class="copy-block-note">Sub: "Evening and weekend availability. Same-day when I can make it happen — which is most of the time."</div>
+  </div>
+
+  <div class="alert alert-warn">
+    <div class="alert-dot" style="background:var(--gold);"></div>
+    <div class="alert-text"><strong>Photo note:</strong> Natural light, slight smile, not stiff. Blazer + statement necklace. Richmond backdrop or cozy workspace with organized papers. Goal: people feel like they already know her before finishing the page.</div>
+  </div>
+</section>
+
+<!-- ==================== PRICING ==================== -->
+<section class="section" id="pricing">
+  <div class="section-eyebrow">Website Pages</div>
+  <div class="section-title">Pricing page</div>
+  <div class="section-sub">No mystery. Every number listed. Finalize actual rates before launch — placeholders used below.</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 3</div>
+      <div class="page-header-name">Pricing</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/pricing</div>
+  </div>
+
+  <div class="alert alert-warn">
+    <div class="alert-dot" style="background:var(--gold);"></div>
+    <div class="alert-text"><strong>Action required:</strong> All prices below are working estimates. Confirm against Snapdocs / NotaryDash market rates for Richmond before launch. Virginia statutory max per notarial act is $10 — confirm all packages comply.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">H1</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:24px;">No mystery.<br>Here's exactly what you'll pay.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Subheadline</div>
+    <div class="copy-block-text">Every price is listed. Every package includes printing, witnesses when needed, and a flat travel fee — no surprise add-ons at the end. If you're not sure which service you need, just text me and I'll tell you straight.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Full itemized rate sheet</div>
+    <table class="price-table">
+      <thead><tr><th>Service</th><th>Rate</th></tr></thead>
+      <tbody>
+        <tr><td class="price-cat" colspan="2">Loan signing</td></tr>
+        <tr><td>Standard loan signing (purchase or refi)<div class="price-sub">Printing, travel, all notarial acts included</div></td><td>$150</td></tr>
+        <tr><td>Jumbo loan signing (200+ pages)<div class="price-sub">Printing, travel, all notarial acts included</div></td><td>$175</td></tr>
+        <tr><td>HELOC signing<div class="price-sub">Printing, travel, all notarial acts included</div></td><td>$125</td></tr>
+        <tr><td class="price-cat" colspan="2">Estate & trust</td></tr>
+        <tr><td>Estate / trust signing package<div class="price-sub">Witness, printing, travel included</div></td><td>$100</td></tr>
+        <tr><td>POA or healthcare directive (standalone)<div class="price-sub">Travel included; witness available +$25</div></td><td>$60</td></tr>
+        <tr><td class="price-cat" colspan="2">General mobile notary</td></tr>
+        <tr><td>First notarial act<div class="price-sub">Travel fee + first signature</div></td><td>$35</td></tr>
+        <tr><td>Each additional notarial act (same visit)<div class="price-sub">VA statutory maximum per act</div></td><td>$10</td></tr>
+        <tr><td>Witness service<div class="price-sub">When not already included</div></td><td>$25</td></tr>
+        <tr><td class="price-cat" colspan="2">Remote online notary (RON)</td></tr>
+        <tr><td>RON session — single document<div class="price-sub">No travel fee; secure VA-authorized platform</div></td><td>$35</td></tr>
+        <tr><td>RON session — multiple documents<div class="price-sub">Up to 5 notarial acts in one session</div></td><td>$60</td></tr>
+        <tr><td class="price-cat" colspan="2">Apostille & authentication</td></tr>
+        <tr><td>State apostille (Virginia)<div class="price-sub">+ $10 VA state fee (pass-through, no markup)</div></td><td>$85</td></tr>
+        <tr><td>Federal apostille (U.S. Dept. of State)<div class="price-sub">+ federal fee (pass-through, no markup)</div></td><td>$135</td></tr>
+        <tr><td class="price-cat" colspan="2">Add-ons</td></tr>
+        <tr><td>Travel fee<div class="price-sub">Flat rate; 50% off for qualifying signers on direct bookings within 20 mi</div></td><td>$25</td></tr>
+        <tr><td>Rush fee (under 2 hrs notice)</td><td>$25</td></tr>
+        <tr><td>Printing<div class="price-sub">Always included in packages</div></td><td>Included</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== SERVICE PILLARS ==================== -->
+<section class="section" id="loan-signing">
+  <div class="section-eyebrow">Website Pages — Service Pillars</div>
+  <div class="section-title">Loan signing (NSA)</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 4</div>
+      <div class="page-header-name">Loan signing agent</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/loan-signing</div>
+  </div>
+
+  <div class="seo-block">
+    <div class="card-label">SEO Metadata</div>
+    <div class="seo-row"><div class="seo-key">Title tag</div><div class="seo-val">Loan Signing Agent Richmond VA | Morgan Danner, Notary</div></div>
+    <div class="seo-row"><div class="seo-key">Meta desc</div><div class="seo-val">NSA-certified loan signing agent in Richmond VA. Purchase, refi, HELOC. Evenings & weekends. Printing included. Already on Snapdocs, NotaryDash & more.</div></div>
+    <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Closing day handled. Every page. Every signature.</div></div>
+    <div class="seo-row"><div class="seo-key">Keywords</div><div class="seo-val">loan signing agent Richmond VA · NSA Richmond VA · mobile notary closing Richmond · notary signing agent Henrico Chesterfield</div></div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Subheadline</div>
+    <div class="copy-block-text">Whether you're buying your first home or refinancing for the third time — I show up prepared, on time, and ready to direct you through every single page. Evenings and weekends. Documents printed. Witness available. No drama.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Consumer card copy</div>
+    <div class="copy-block-text">"I just need someone to come to me and tell me where to sign."
+
+Closing day is a big deal. You shouldn't have to figure out where to go, what to print, or whether you need a witness. I come to you — your home, your lender's office, wherever works — with everything ready. I'll direct you clearly through every page, tell you exactly where to sign and initial, and make sure nothing gets missed. If you have questions about your loan terms, your lender is just a call away — and I'll make sure you have everything you need to reach them.</div>
+    <div class="copy-block-note">UPL-compliant: directs to signing location, not explaining legal content.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">B2B card copy (title companies / agents)</div>
+    <div class="copy-block-text">"I need someone I can add to my rotation and actually trust."
+
+I'm already on Snapdocs, NotaryDash, SigningOrder, and more. NSA certified, E&O insured, NNA background screened. I handle printing, confirm packages, and communicate proactively — before, during, and after the signing. Your clients are your clients. I protect that relationship.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Platform list</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+      <span class="pill pill-plum">Snapdocs</span><span class="pill pill-plum">NotaryDash</span><span class="pill pill-plum">SigningOrder</span><span class="pill pill-plum">NotaryRotary</span><span class="pill pill-plum">Notary Cafe</span><span class="pill pill-plum">123Notary</span><span class="pill pill-plum">Superior Notary Services</span><span class="pill pill-plum">LSI</span><span class="pill pill-plum">ServiceLink</span>
+    </div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">CTA</div>
+    <div class="copy-block-text">Ready to get your closing on the calendar?
+
+Title companies: add me to your rotation directly. Homeowners: book below or text me — I'll confirm availability within the hour.</div>
+  </div>
+</section>
+
+<section class="section" id="estate">
+  <div class="section-eyebrow">Website Pages — Service Pillars</div>
+  <div class="section-title">Estate &amp; trust signings</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 5</div>
+      <div class="page-header-name">Estate & trust</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/estate-trust</div>
+  </div>
+
+  <div class="seo-block">
+    <div class="card-label">SEO Metadata</div>
+    <div class="seo-row"><div class="seo-key">Title tag</div><div class="seo-val">Estate & Trust Notary Richmond VA | Morgan Danner, Notary</div></div>
+    <div class="seo-row"><div class="seo-key">Meta desc</div><div class="seo-val">Mobile notary for estate & trust signings in Richmond VA. Wills, POA, healthcare directives. Hospitals, hospice, senior living. Evenings & weekends.</div></div>
+    <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Some signings matter more than others.</div></div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Subheadline</div>
+    <div class="copy-block-text">Wills. Trusts. Powers of attorney. Healthcare directives. These aren't just documents — they're the decisions people make for the people they love. I show up for those moments with patience, discretion, and zero rush.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Pull quote (use on page)</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;border-left:3px solid var(--plum);padding-left:16px;">"These aren't transactional signings. Someone is usually having one of the hardest weeks of their life. My job is to make one part of it easier — and to make sure the documents hold up legally so the family is protected."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">CTA</div>
+    <div class="copy-block-text">Need someone there today? Call or text — I'll make it happen.
+
+Attorneys: let's talk about becoming a regular referral partner. Families: just reach out. We'll figure out the rest together.</div>
+  </div>
+</section>
+
+<section class="section" id="ron">
+  <div class="section-eyebrow">Website Pages — Service Pillars</div>
+  <div class="section-title">Remote online notary (RON)</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 6</div>
+      <div class="page-header-name">Remote online notary</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/remote-online-notary</div>
+  </div>
+
+  <div class="seo-block">
+    <div class="card-label">SEO Metadata</div>
+    <div class="seo-row"><div class="seo-key">Title tag</div><div class="seo-val">Remote Online Notary Virginia | Morgan Danner, Notary</div></div>
+    <div class="seo-row"><div class="seo-key">Meta desc</div><div class="seo-val">Virginia-authorized remote online notarization (RON). Legal, secure, same-day. Sign from anywhere in VA — no travel needed. Book online now.</div></div>
+    <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Get it notarized. Don't go anywhere.</div></div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">How it works (5 steps)</div>
+    <div class="copy-block-text">1. Book your session — text or book online. I confirm it qualifies for RON.
+2. Upload your document — send digitally or I walk you through uploading in-platform.
+3. Verify your identity — credential analysis + knowledge-based authentication. About 2 minutes.
+4. Connect on video — we meet on screen, I review the document with you, you ask questions.
+5. Sign electronically — you sign, I apply the digital notarial seal. Certified copy delivered immediately.</div>
+  </div>
+</section>
+
+<section class="section" id="apostille">
+  <div class="section-eyebrow">Website Pages — Service Pillars</div>
+  <div class="section-title">Apostille &amp; authentication</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 7</div>
+      <div class="page-header-name">Apostille & authentication</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/apostille</div>
+  </div>
+
+  <div class="seo-block">
+    <div class="card-label">SEO Metadata</div>
+    <div class="seo-row"><div class="seo-key">Title tag</div><div class="seo-val">Apostille Service Richmond VA | Morgan Danner, Notary</div></div>
+    <div class="seo-row"><div class="seo-key">Meta desc</div><div class="seo-val">Apostille and document authentication in Richmond VA. State & federal. Immigration documents welcome. Full chain managed. Fast turnaround.</div></div>
+    <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">International paperwork is confusing. I handle it.</div></div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Plain-language explainer</div>
+    <div class="copy-block-text">An apostille is a certificate that authenticates the origin of a public document so it's legally recognized in another country. Virginia is a member of the Hague Convention — Virginia-issued apostilles are recognized in 120+ countries. For non-Hague countries, a different process (federal authentication) applies. I'll tell you exactly which one you need and why.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Turnaround times</div>
+    <div class="copy-block-text">State apostille (Virginia Secretary of State): 3–5 business days
+Federal apostille (U.S. Dept. of State): 5–10 business days
+Rush processing: sometimes available — ask when you reach out</div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section" id="faq">
+  <div class="section-eyebrow">Website Pages</div>
+  <div class="section-title">FAQ page</div>
+  <div class="section-sub">Two sections: For clients / For partners. Answers written in Morgan's voice — conversational for simple questions, thorough for complex ones.</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 8</div>
+      <div class="page-header-name">FAQ</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/faq</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">H1</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:24px;">Questions? Good.<br>Here are the answers.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Subheadline</div>
+    <div class="copy-block-text">If you don't see what you're looking for, just text me. I'd rather answer a question than have you guess — and I actually pick up.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Key FAQ answers — People's Rate (updated)</div>
+    <div class="copy-block-text">Q: I heard you have discounts for certain groups. How does that work?
+
+A: The People's Rate — discounted travel and reduced notary fees for veterans, LGBTQ+ community, single parents, artists, activists, seniors (65+), and immigrants. It's available on direct bookings only — when you contact me yourself or a family member books on your behalf. The discount follows the signer, so it's your status that matters, not whoever's making the call. No paperwork, no verification hoops. Just mention it when you book. See the pricing page for full tier details.
+
+---
+
+Q: Do you charge a travel fee?
+
+A: Yes — a flat $25 for all mobile appointments regardless of distance within my service area. No tiers, no surprises. Qualifying signers under The People's Rate get 50% off the travel fee on direct bookings within 20 miles of downtown Richmond. See the pricing page for full details.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">CTA at bottom of page</div>
+    <div class="copy-block-text">Still have a question? Just text me. Seriously — I'd rather answer it than have you wonder. And if you're ready to book, even better.</div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="section" id="contact">
+  <div class="section-eyebrow">Website Pages</div>
+  <div class="section-title">Contact / Book now</div>
+  <div class="section-sub">Two-form toggle: client form and partner form. Both submit to same inbox, tagged differently.</div>
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-num">Page 9</div>
+      <div class="page-header-name">Contact / Book now</div>
+    </div>
+    <div class="page-header-url">morgannotary.com/contact</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">H1</div>
+    <div class="copy-block-text" style="font-family:'Cormorant Garamond',serif;font-size:24px;">Let's get it on the calendar.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Subheadline</div>
+    <div class="copy-block-text">Fill out the form below or just text me directly. Either way, I respond fast — typically within the hour during evening hours. No autoresponders. No phone trees. Just me.</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Client form fields</div>
+    <div class="copy-block-text">Name (required)
+Phone or email (required)
+Service needed (dropdown): Loan signing / Estate or trust / POA or healthcare directive / RON / Apostille / General notarization / Not sure
+Preferred date (text: "e.g. this Friday, ASAP")
+Preferred time (text: "e.g. after 5pm, weekend AM")
+Location / city
+Message / anything else (hint text below): "Qualifying for The People's Rate? Just mention it here — no documentation needed. Available on direct bookings only; the discount applies to the person signing, not the person booking."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Partner form fields</div>
+    <div class="copy-block-text">Name (required)
+Firm or company (required)
+Phone or email (required)
+Role (dropdown): Estate planning attorney / Title company / Real estate agent or broker / Financial advisor / RIA / Immigration attorney / Hospital or senior living social worker / Other
+What are you looking for (dropdown): Add to notary rotation / Establish client referral relationship / One-time signing / Learn more / Something else
+Tell me about your needs (textarea)</div>
+    <div class="copy-block-note">Partner form response promise: "I'll follow up within one business day." — more professional than "within the hour."</div>
+  </div>
+
+  <div class="copy-block">
+    <div class="copy-block-label">Hours (placeholder — update before launch)</div>
+    <div class="copy-block-text">Monday–Friday: 4:00 pm – 9:00 pm
+Saturday: 9:00 am – 7:00 pm
+Sunday: 10:00 am – 5:00 pm
+Same-day: Text me directly — "I'll tell you honestly if I can make it work"</div>
+  </div>
+</section>
+
+<!-- ==================== SERVICE AREAS ==================== -->
+<section class="section" id="service-areas">
+  <div class="section-eyebrow">Website Pages</div>
+  <div class="section-title">Service area pages ×7</div>
+  <div class="section-sub">Template base with local flavor. Each page has its own SEO metadata, H1, body, local callout, mini FAQ, and CTA. Never word-for-word identical.</div>
+
+  <div class="card">
+    <div class="card-label">Page structure (same for all 7)</div>
+    <div class="card-text">
+      1. SEO metadata (unique title tag, meta description, H1 per city)<br>
+      2. Hero headline<br>
+      3. Two paragraphs of body copy — who Morgan is + why this city matters<br>
+      4. Local callout block (dark bg, neon accent) — 2–3 genuine local references<br>
+      5. Service chips (all 5 services)<br>
+      6. Mini FAQ (2 questions specific to that city/area)<br>
+      7. CTA strip (color rotates per city)
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+    <div class="seo-block">
+      <div class="card-label">Richmond</div>
+      <div class="seo-row"><div class="seo-key">URL</div><div class="seo-val">/richmond-va</div></div>
+      <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Mobile notary in Richmond, VA</div></div>
+      <div class="seo-row"><div class="seo-key">Local ref</div><div class="seo-val">Church Hill to Carytown, VCU Medical, Bon Secours</div></div>
+    </div>
+    <div class="seo-block">
+      <div class="card-label">Midlothian</div>
+      <div class="seo-row"><div class="seo-key">URL</div><div class="seo-val">/midlothian-va</div></div>
+      <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Mobile notary in Midlothian, VA</div></div>
+      <div class="seo-row"><div class="seo-key">Local ref</div><div class="seo-val">Midlothian Turnpike, Robious Rd, Chesterfield County</div></div>
+    </div>
+    <div class="seo-block">
+      <div class="card-label">Glen Allen</div>
+      <div class="seo-row"><div class="seo-key">URL</div><div class="seo-val">/glen-allen-va</div></div>
+      <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Mobile notary in Glen Allen, VA</div></div>
+      <div class="seo-row"><div class="seo-key">Local ref</div><div class="seo-val">Innsbrook, Twin Hickory, west end corridor, 295</div></div>
+    </div>
+    <div class="seo-block">
+      <div class="card-label">Mechanicsville</div>
+      <div class="seo-row"><div class="seo-key">URL</div><div class="seo-val">/mechanicsville-va</div></div>
+      <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Mobile notary in Mechanicsville, VA</div></div>
+      <div class="seo-row"><div class="seo-key">Local ref</div><div class="seo-val">Cold Harbor Rd, Bell Creek, Hanover County, Rt 360</div></div>
+    </div>
+    <div class="seo-block">
+      <div class="card-label">Chester</div>
+      <div class="seo-row"><div class="seo-key">URL</div><div class="seo-val">/chester-va</div></div>
+      <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Mobile notary in Chester, VA</div></div>
+      <div class="seo-row"><div class="seo-key">Local ref</div><div class="seo-val">Route 10, Chester Rd, Harrowgate, I-95 corridor</div></div>
+    </div>
+    <div class="seo-block">
+      <div class="card-label">Short Pump / Tuckahoe</div>
+      <div class="seo-row"><div class="seo-key">URL</div><div class="seo-val">/short-pump-va</div></div>
+      <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Mobile notary in Short Pump, VA</div></div>
+      <div class="seo-row"><div class="seo-key">Local ref</div><div class="seo-val">Tuckahoe area (daughter's school), Gayton Rd, Wellesley, I-64</div></div>
+    </div>
+    <div class="seo-block">
+      <div class="card-label">Ashland</div>
+      <div class="seo-row"><div class="seo-key">URL</div><div class="seo-val">/ashland-va</div></div>
+      <div class="seo-row"><div class="seo-key">H1</div><div class="seo-val">Mobile notary in Ashland, VA</div></div>
+      <div class="seo-row"><div class="seo-key">Local ref</div><div class="seo-val">Historic downtown, Randolph-Macon, I-95 / Rt 1</div></div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-dot" style="background:var(--plum);"></div>
+    <div class="alert-text"><strong>Note on Short Pump:</strong> Update local callout to reference Tuckahoe specifically and separately — Morgan's daughter goes to school there, so it reads more authentic than grouping Tuckahoe with Short Pump generically.</div>
+  </div>
+</section>
+
+<!-- ==================== PEOPLE'S RATE ==================== -->
+<section class="section" id="peoples-rate">
+  <div class="section-eyebrow">Programs</div>
+  <div class="section-title">The People's Rate</div>
+  <div class="section-sub">Community discount program. Two tiers. Honor system. Full rules documented below.</div>
+
+  <div class="alert alert-warn">
+    <div class="alert-dot" style="background:var(--gold);"></div>
+    <div class="alert-text"><strong>The governing rule:</strong> The discount follows the signer — not the person booking. Direct bookings only. Professional/platform bookings (title companies, attorneys, any third-party arrangement) always use standard rates, regardless of who the signer is.</div>
+  </div>
+
+  <div class="tier-card">
+    <div class="tier-header" style="background:var(--emerald);">
+      <div>
+        <div class="tier-name">Tier 1 — Discounted travel fee</div>
+        <div class="tier-groups">Veterans · LGBTQ+ · Single parents · Artists · Activists · Nonprofit workers</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="tier-discount">50% off</div>
+        <div class="tier-discount-sub">travel fee only</div>
+      </div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-row">
+        <div><div class="tier-col-label">Travel fee</div><div class="tier-col-text">$12.50 instead of $25 (within 20 mi of downtown Richmond)</div></div>
+        <div><div class="tier-col-label">Notary fee</div><div class="tier-col-text">Standard rate — no additional discount</div></div>
+      </div>
+      <div class="tier-row">
+        <div><div class="tier-col-label">Verification</div><div class="tier-col-text">Honor system. No documentation required.</div></div>
+        <div><div class="tier-col-label">Intent</div><div class="tier-col-text">Values alignment + community signal. Not necessarily a financial need discount.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tier-card">
+    <div class="tier-header" style="background:var(--plum);">
+      <div>
+        <div class="tier-name">Tier 2 — Discounted travel + reduced notary fee</div>
+        <div class="tier-groups">Seniors 65+ · Immigrants & DACA recipients</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="tier-discount">50% off travel</div>
+        <div class="tier-discount-sub">+ 10% off notary fee</div>
+      </div>
+    </div>
+    <div class="tier-body">
+      <div class="tier-row">
+        <div><div class="tier-col-label">Travel fee</div><div class="tier-col-text">$12.50 instead of $25 (within 20 mi of downtown Richmond)</div></div>
+        <div><div class="tier-col-label">Notary fee</div><div class="tier-col-text">10% off base rate for the service</div></div>
+      </div>
+      <div class="tier-row">
+        <div><div class="tier-col-label">Verification</div><div class="tier-col-text">Honor system. No documentation required.</div></div>
+        <div><div class="tier-col-label">Intent</div><div class="tier-col-text">Genuine accessibility for groups most likely to need financial consideration.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Full eligibility rules</div>
+    <ul class="rule-list">
+      <li class="rule-item"><div class="rule-dot" style="background:var(--plum);"></div><div class="rule-text"><strong>The discount follows the signer.</strong> The qualifying person must be the one signing the document — not the person booking on their behalf.</div></li>
+      <li class="rule-item"><div class="rule-dot" style="background:var(--emerald);"></div><div class="rule-text"><strong>Direct bookings only.</strong> If the signing is arranged through a title company, attorney, or any professional platform, standard rates apply regardless of who the signer is.</div></li>
+      <li class="rule-item"><div class="rule-dot" style="background:var(--navy);"></div><div class="rule-text"><strong>Within 20 miles of downtown Richmond</strong> for the travel discount. Outside that radius, full travel fee applies. Tier 2 notary fee discount applies regardless of distance.</div></li>
+      <li class="rule-item"><div class="rule-dot" style="background:var(--gold);"></div><div class="rule-text"><strong>Honor system — no documentation required.</strong> Mention it when booking. The occasional bad actor isn't worth the friction of verification for everyone else.</div></li>
+      <li class="rule-item"><div class="rule-dot" style="background:var(--plum);"></div><div class="rule-text"><strong>One qualifying category is enough.</strong> No stacked discounts — someone who is both a veteran and an artist still gets Tier 1, not double.</div></li>
+      <li class="rule-item"><div class="rule-dot" style="background:var(--emerald);"></div><div class="rule-text"><strong>Mention it at booking — not after.</strong> Discount cannot be applied retroactively once pricing is confirmed.</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== B2B OUTREACH ==================== -->
+<section class="section" id="b2b">
+  <div class="section-eyebrow">Outreach Templates</div>
+  <div class="section-title">B2B partner outreach</div>
+  <div class="section-sub">Five partner types. Initial email + follow-up each. Professional, concise but thorough. Send follow-up 5–10 days after initial if no response.</div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <div class="email-type" style="color:var(--plum);">Partner 1 — Estate planning attorneys (west end + downtown)</div>
+      <div class="email-meta-row"><div class="email-meta-key">Subject:</div><div class="email-meta-val">Reliable notary for your estate clients — Richmond mobile + field signings</div></div>
+    </div>
+    <div class="email-body">
+      <div class="email-text">Hi [First name],
+
+I'm Morgan Danner — a Virginia-commissioned mobile notary and NNA Certified Signing Agent based in Richmond. I specialize in estate and trust signings and am reaching out to introduce myself as a reliable resource for your firm.
+
+I understand that field signings for estate planning clients require a different level of care than a standard notarization. I work at the signer's pace, handle signings in hospitals, hospice facilities, senior living communities, and private residences, and bring a witness when needed. I treat your clients the way you'd want them treated — with patience and discretion — and report back promptly so you can close the matter.
+
+Credentials at a glance:
+— Virginia Notary Public, Commission #8056572
+— NNA Certified Notary Signing Agent
+— E&O insured through the NNA
+— NNA annual background screening on file
+— Evening and weekend availability; same-day when needed
+
+I'd welcome the opportunity to be a resource for your firm.
+
+Morgan Danner
+Morgan Danner, Notary
+(804) 215-6674
+morgan@morgannotary.com</div>
+      <div class="email-note">Follow-up (7–10 days): "Following up on my note from last week. If you ever find yourself needing a notary for a client signing on short notice — evenings, weekends, or at a medical facility — I'm a reliable option and easy to reach. No obligation to establish anything formal."</div>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <div class="email-type" style="color:var(--navy);">Partner 2 — Title companies</div>
+      <div class="email-meta-row"><div class="email-meta-key">Subject:</div><div class="email-meta-val">NSA available for Richmond metro signings — evenings, weekends, same-day</div></div>
+    </div>
+    <div class="email-body">
+      <div class="email-text">Hi [First name],
+
+I'm Morgan Danner, an NNA Certified Notary Signing Agent serving the Richmond metro — including Richmond, Midlothian, Glen Allen, Mechanicsville, Chester, Short Pump, and Ashland. I specialize in evening and weekend availability and am reaching out to introduce myself as a reliable addition to your signing rotation.
+
+I'm active on Snapdocs, NotaryDash, SigningOrder, NotaryRotary, Notary Cafe, 123Notary, Superior Notary Services, LSI, and ServiceLink — so you can assign directly through your existing workflow.
+
+What I bring to every signing:
+— Documents printed and confirmed before arrival
+— Proactive communication: confirmation, completion notice, same-day drop-off when required
+— Evening and weekend availability as standard — no premium charge
+— Same-day turnaround available for urgent closings
+— E&O insured · NNA background screened · VA-commissioned
+
+Morgan Danner
+(804) 215-6674
+morgan@morgannotary.com</div>
+      <div class="email-note">Follow-up (5–7 days): "If you have a signing that's hard to cover — last-minute, evening, or in an area where you're short on coverage — feel free to reach out or assign through any of the platforms I listed. I'm easy to reach and respond fast."</div>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <div class="email-type" style="color:var(--emerald);">Partner 3 — Financial advisors / RIAs</div>
+      <div class="email-meta-row"><div class="email-meta-key">Subject:</div><div class="email-meta-val">Mobile notary for trust signings — Richmond area</div></div>
+    </div>
+    <div class="email-body">
+      <div class="email-text">Hi [First name],
+
+I'm Morgan Danner, a Virginia-commissioned mobile notary based in Richmond. I'm reaching out to introduce myself as a resource for trust document signings and notarizations for your clients.
+
+I understand that your clients expect a seamless, professional experience — and that anything associated with your firm reflects on you. I come to the client's home or office, bring everything needed including a witness, and handle trust signings with the level of care and discretion these documents require.
+
+I work evenings and weekends by design, which means scheduling around your clients' lives — not the other way around.
+
+Morgan Danner
+(804) 215-6674
+morgan@morgannotary.com</div>
+      <div class="email-note">Follow-up (7–10 days): "Happy to be a name in your back pocket rather than a formal commitment."</div>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <div class="email-type" style="color:var(--gold);">Partner 4 — Immigration attorneys</div>
+      <div class="email-meta-row"><div class="email-meta-key">Subject:</div><div class="email-meta-val">Apostille & notary services for immigration clients — Richmond</div></div>
+    </div>
+    <div class="email-body">
+      <div class="email-text">Hi [First name],
+
+I'm Morgan Danner, a Virginia-commissioned mobile notary based in Richmond. I handle apostille processing at both the state and federal level and am reaching out to introduce myself as a resource for your immigration clients.
+
+What I handle:
+— Virginia Secretary of State apostilles (3–5 business days)
+— U.S. Department of State federal apostilles (5–10 business days)
+— Notarization of documents prior to apostille when required
+— Full authentication chain for non-Hague Convention countries
+— Mobile notary services for clients who need in-person signing
+
+I submit correctly the first time and communicate status throughout the process.
+
+Morgan Danner
+(804) 215-6674
+morgan@morgannotary.com</div>
+      <div class="email-note">Follow-up (7–10 days): "Happy to answer any questions about my process or turnaround times before you send anyone my way."</div>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <div class="email-type" style="color:var(--navy);">Partner 5 — Hospital advocates & senior living social workers</div>
+      <div class="email-meta-row"><div class="email-meta-key">Subject:</div><div class="email-meta-val">Mobile notary available for patient & resident signings — Richmond area</div></div>
+    </div>
+    <div class="email-body">
+      <div class="email-text">Hi [First name],
+
+I'm Morgan Danner, a Virginia-commissioned mobile notary based in Richmond. I'm reaching out because patients and residents sometimes need documents notarized urgently — and finding a notary who can come quickly and handle the situation with care isn't always easy.
+
+I come to hospitals, hospice facilities, and senior living communities throughout the Richmond metro. I bring a witness when needed, work at whatever pace is right for the patient or resident, and understand that these are not routine visits.
+
+I'm available evenings and weekends — if a family calls you at 4pm on a Friday needing a notary, I want to be the name you give them.
+
+Morgan Danner
+(804) 215-6674
+morgan@morgannotary.com</div>
+      <div class="email-note">Follow-up (7–10 days): "No action needed on your end — I just want to make sure you have my information for when a family needs a notary on short notice. Feel free to pass my number along anytime."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LAUNCH CHECKLIST ==================== -->
+<section class="section" id="checklist">
+  <div class="section-eyebrow">Launch</div>
+  <div class="section-title">Pre-launch checklist</div>
+  <div class="section-sub">Everything that needs to be in place before the site goes live.</div>
+
+  <div class="checklist">
+    <div class="checklist-section">
+      <div class="checklist-section-label" style="color:#A32D2D;">Must-do before launch</div>
+      <div class="check-item check-urgent"><div class="check-box"></div><div>Replace all <strong>(804) 215-6674)</strong> placeholders with Google Voice number <span class="check-label-urgent">URGENT</span></div></div>
+      <div class="check-item check-urgent"><div class="check-box"></div><div>Replace all <strong>Commission #8056572</strong> with real VA commission number <span class="check-label-urgent">URGENT</span></div></div>
+      <div class="check-item check-urgent"><div class="check-box"></div><div>Replace <strong>morgan@morgannotary.com</strong> with real email address <span class="check-label-urgent">URGENT</span></div></div>
+      <div class="check-item check-urgent"><div class="check-box"></div><div>Confirm and finalize all pricing numbers against Richmond market rates <span class="check-label-urgent">URGENT</span></div></div>
+      <div class="check-item check-urgent"><div class="check-box"></div><div>Add real photo of Morgan (see photo brief on About page) <span class="check-label-urgent">URGENT</span></div></div>
+      <div class="check-item check-urgent"><div class="check-box"></div><div>Set up Google Voice with 804 area code number <span class="check-label-urgent">URGENT</span></div></div>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-label">Legal & compliance</div>
+      <div class="check-item"><div class="check-box"></div><div>Have a Virginia-licensed attorney review final site copy for UPL compliance</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Confirm E&O insurance is active and coverage details are accurate</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Confirm NNA background screening is current</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Confirm RON platform (OneNotary) authorization is complete</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Confirm LLC is registered with Virginia SCC</div></div>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-label">Technical (React SPA)</div>
+      <div class="check-item"><div class="check-box"></div><div>Import Google Fonts: Cormorant Garamond, DM Sans, DM Mono</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Set unique meta title + description per page (especially all 7 city pages)</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Add canonical URLs to all city pages</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Set up contact form submissions (client + partner) to separate email tags</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Mobile responsive — especially the two-column layouts</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Add Google Analytics / Search Console</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Submit sitemap to Google Search Console after launch</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Add robots.txt</div></div>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-label">Content to swap post-launch</div>
+      <div class="check-item"><div class="check-box"></div><div>Replace 5 composite reviews with real client reviews as they come in</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Update availability hours on Contact page with real schedule</div></div>
+      <div class="check-item"><div class="check-box"></div><div>Update Short Pump city page to reference Tuckahoe as a distinct local callout</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DIRECTORIES ==================== -->
+<section class="section" id="directories">
+  <div class="section-eyebrow">Launch</div>
+  <div class="section-title">Directory listings</div>
+  <div class="section-sub">Citation consistency drives local SEO. Each listing = another surface where clients find you. Use identical NAP (Name, Address, Phone) everywhere.</div>
+
+  <div class="card">
+    <div class="card-label">NAP to use consistently across all listings</div>
+    <div class="copy-block-text" style="font-family:'DM Mono',monospace;font-size:13px;background:var(--warm-gray);padding:12px;border-radius:8px;">
+Name: Morgan Danner, Notary
+Phone: (804) 215-6674 [Google Voice]
+Email: morgan@morgannotary.com
+Website: morgannotary.com
+Service area: Richmond, Midlothian, Glen Allen, Mechanicsville, Chester, Short Pump, Ashland, VA</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div class="card">
+      <div class="card-label" style="color:var(--emerald);">Notary-specific (priority)</div>
+      <div class="card-text" style="font-size:13px;line-height:2;">
+        NotaryRotary<br>123Notary<br>Notary Cafe<br>NNA "Find a Notary"<br>NotaryDash<br>Snapdocs<br>SigningOrder<br>Superior Notary Services<br>LSI · ServiceLink<br>PandaDoc Notary<br>OneNotary (RON)
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label" style="color:var(--navy);">General business listings</div>
+      <div class="card-text" style="font-size:13px;line-height:2;">
+        Google Business Profile<br>Bing Places<br>Apple Business Connect<br>Yelp<br>Nextdoor<br>Angi<br>Thumbtack<br>Chesterfield Chamber of Commerce<br>Henrico Chamber of Commerce<br>Hanover Chamber of Commerce
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+const links = document.querySelectorAll('.sidebar-link');
+const sections = document.querySelectorAll('section.section, div.hero');
+
+function updateActive() {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id || '';
+  });
+  links.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateActive);
+updateActive();
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+---
+import { AREAS } from "@lib/areas";
+import { MAILTO_HREF, NAP, TEL_HREF } from "@lib/nap";
+import { SERVICES } from "@lib/services";
+import { Icon } from "astro-icon/components";
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[color:var(--color-charcoal)] text-[color:rgba(255,255,255,0.78)] mt-24">
+  <div class="container-brand section-tight grid gap-10 lg:grid-cols-4">
+    <div class="space-y-4">
+      <div class="flex items-center gap-3 text-white">
+        <span class="inline-flex size-10 items-center justify-center rounded-full bg-[color:var(--color-plum)] font-display text-xl">
+          M
+        </span>
+        <div class="leading-tight">
+          <div class="font-display text-xl text-white">Morgan Danner</div>
+          <div class="eyebrow eyebrow-neon">Notary · Richmond, VA</div>
+        </div>
+      </div>
+      <p class="text-sm max-w-xs">
+        {NAP.description}
+      </p>
+      <p class="text-xs font-mono-brand text-[color:rgba(255,255,255,0.55)]">
+        VA Commission #{NAP.commission} · Licensed · Insured · NNA Member
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-neon)] mb-3">
+        Services
+      </h2>
+      <ul class="space-y-2">
+        {
+          SERVICES.map((s) => (
+            <li>
+              <a class="text-sm text-white/80 no-underline hover:text-white" href={`/services/${s.slug}`}>
+                {s.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-neon)] mb-3">
+        Service areas
+      </h2>
+      <ul class="space-y-2">
+        {
+          AREAS.map((a) => (
+            <li>
+              <a class="text-sm text-white/80 no-underline hover:text-white" href={`/areas/${a.slug}`}>
+                {a.city}, VA
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="text-xs font-mono-brand uppercase tracking-widest text-[color:var(--color-neon)] mb-3">
+        Connect
+      </h2>
+      <a class="flex items-center gap-2 text-sm text-white no-underline" href={TEL_HREF}>
+        <Icon name="lucide:phone" class="size-4" />
+        <span class="font-mono-brand">{NAP.phoneDisplay}</span>
+      </a>
+      <a class="flex items-center gap-2 text-sm text-white no-underline" href={MAILTO_HREF}>
+        <Icon name="lucide:mail" class="size-4" />
+        <span>{NAP.email}</span>
+      </a>
+      <a class="flex items-center gap-2 text-sm text-white no-underline" href="/contact">
+        <Icon name="lucide:calendar" class="size-4" />
+        <span>Book a signing</span>
+      </a>
+      <div class="pt-2 space-y-1 text-xs text-white/60">
+        <div><span class="font-mono-brand uppercase text-[color:var(--color-neon)] text-[10px] tracking-widest">Mon–Fri</span> · {NAP.hours.mondayFriday.display}</div>
+        <div><span class="font-mono-brand uppercase text-[color:var(--color-neon)] text-[10px] tracking-widest">Sat</span> · {NAP.hours.saturday.display}</div>
+        <div><span class="font-mono-brand uppercase text-[color:var(--color-neon)] text-[10px] tracking-widest">Sun</span> · {NAP.hours.sunday.display}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-brand py-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between text-xs text-white/60">
+      <div>
+        © {year} {NAP.legalName}. Richmond, VA.
+      </div>
+      <nav aria-label="Legal" class="flex flex-wrap gap-4">
+        <a class="text-white/70 no-underline hover:text-white" href="/legal/privacy">Privacy</a>
+        <a class="text-white/70 no-underline hover:text-white" href="/legal/terms">Terms</a>
+        <a class="text-white/70 no-underline hover:text-white" href="/legal/accessibility">Accessibility</a>
+        <a class="text-white/70 no-underline hover:text-white" href="/peoples-rate">The People's Rate</a>
+      </nav>
+    </div>
+  </div>
+</footer>

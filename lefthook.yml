@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  commands:
+    biome:
+      glob: "*.{js,ts,tsx,jsx,astro,json}"
+      run: pnpm biome check --write {staged_files} && git add {staged_files}
+    upl-check:
+      run: node scripts/check-upl.mjs
+    nap-check:
+      run: node scripts/validate-nap.mjs
+
+pre-push:
+  commands:
+    typecheck:
+      run: pnpm typecheck

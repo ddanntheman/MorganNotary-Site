@@ -1,0 +1,76 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import Breadcrumb from "@components/sections/Breadcrumb.astro";
+import CtaStrip from "@components/sections/CtaStrip.astro";
+import FaqAccordion from "@components/sections/FaqAccordion.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { breadcrumbJsonLd, faqJsonLd } from "@lib/schema";
+import { absUrl, buildMeta } from "@lib/seo";
+
+const entry = await getEntry("site", "faq");
+if (!entry) throw new Error("Missing site/faq.mdx");
+const { Content } = await render(entry);
+
+const all = await getCollection("faqItems");
+const sorted = all.sort((a, b) => a.data.order - b.data.order);
+
+const groups = [
+  { key: "general", title: "The basics" },
+  { key: "pricing", title: "Pricing" },
+  { key: "scheduling", title: "Scheduling &amp; travel" },
+  { key: "mobile", title: "Mobile visits" },
+  { key: "loan-signing", title: "Loan signings" },
+  { key: "estate-trust", title: "Estate &amp; trust" },
+  { key: "remote-online-notary", title: "Remote online (RON)" },
+  { key: "apostille", title: "Apostille" },
+  { key: "peoples-rate", title: "The People's Rate" },
+  { key: "for-partners", title: "For partners" },
+] as const;
+
+const grouped = groups
+  .map((g) => ({
+    ...g,
+    items: sorted
+      .filter((f) => f.data.topics.includes(g.key))
+      .map((f) => ({ id: f.data.id, question: f.data.question, answer: f.data.answer })),
+  }))
+  .filter((g) => g.items.length > 0);
+
+const meta = buildMeta({
+  title: entry.data.seo.title,
+  description: entry.data.seo.description,
+  path: "/faq",
+});
+
+const top = sorted.slice(0, 10).map((f) => ({
+  question: f.data.question,
+  answer: f.data.answer,
+}));
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: "Home", url: absUrl("/") },
+    { name: "FAQ", url: absUrl("/faq") },
+  ]),
+  faqJsonLd(top),
+];
+---
+
+<BaseLayout meta={meta} jsonLd={jsonLd}>
+  <Breadcrumb items={[{ name: "Home", url: "/" }, { name: "FAQ", url: "/faq" }]} />
+
+  <section class="section-tight">
+    <div class="container-brand max-w-3xl">
+      <p class="eyebrow mb-3">FAQ</p>
+      <h1 class="font-display text-4xl sm:text-5xl">{entry.data.h1}</h1>
+      <p class="mt-4 text-lg text-[color:var(--color-text-secondary)]">{entry.data.subhead}</p>
+      <div class="prose-brand mt-4"><Content /></div>
+    </div>
+  </section>
+
+  {grouped.map((g) => <FaqAccordion title={g.title} items={g.items} idPrefix={g.key} />)}
+
+  <CtaStrip
+    heading="Didn't see your question?"
+    body="Text me. I'd rather answer one quick question than leave you guessing."
+  />
+</BaseLayout>

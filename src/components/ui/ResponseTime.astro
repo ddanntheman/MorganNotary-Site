@@ -1,0 +1,14 @@
+---
+interface Props {
+  text?: string;
+  class?: string;
+}
+const { text = "Usually responds within 1 hour", class: className = "" } = Astro.props;
+---
+
+<span
+  class={`inline-flex items-center gap-2 pill bg-[color:var(--color-emerald-light)] text-[color:var(--color-emerald)] ${className}`}
+>
+  <span class="pulse-dot !bg-[color:var(--color-emerald)]" aria-hidden="true"></span>
+  {text}
+</span>

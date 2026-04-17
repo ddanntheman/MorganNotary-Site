@@ -1,0 +1,88 @@
+---
+import { NAP } from "@lib/nap";
+import type { Meta } from "@lib/seo";
+
+interface Props {
+  meta: Meta;
+  jsonLd?: object[];
+}
+
+const { meta, jsonLd = [] } = Astro.props;
+const plausibleDomain = NAP.integrations.plausibleDomain;
+const ga4Id = NAP.integrations.ga4Id;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{meta.title}</title>
+<meta name="description" content={meta.description} />
+<link rel="canonical" href={meta.canonical} />
+{meta.noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={meta.type} />
+<meta property="og:title" content={meta.title} />
+<meta property="og:description" content={meta.description} />
+<meta property="og:url" content={meta.canonical} />
+<meta property="og:image" content={meta.ogImage} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content={NAP.legalName} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={meta.title} />
+<meta name="twitter:description" content={meta.description} />
+<meta name="twitter:image" content={meta.ogImage} />
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#5B2D82" />
+
+<!-- Fonts: preconnect + swap-friendly load -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@500&family=DM+Sans:wght@400;500;600;700&display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Mono:wght@500&family=DM+Sans:wght@400;500;600;700&display=swap"
+/>
+
+<!-- JSON-LD -->
+{
+  jsonLd.map((ld) => (
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />
+  ))
+}
+
+<!-- Analytics (privacy-first, cookieless) -->
+{
+  plausibleDomain && (
+    <script
+      is:inline
+      defer
+      data-domain={plausibleDomain}
+      src="https://plausible.io/js/script.outbound-links.js"
+    />
+  )
+}
+{
+  ga4Id && (
+    <>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} />
+      <script is:inline define:vars={{ ga4Id }}>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ga4Id, { anonymize_ip: true });
+        `}
+      </script>
+    </>
+  )
+}

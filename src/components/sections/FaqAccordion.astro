@@ -1,0 +1,52 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+  id?: string;
+}
+interface Props {
+  items: FaqItem[];
+  title?: string;
+  eyebrow?: string;
+  idPrefix?: string;
+}
+const { items, title, eyebrow, idPrefix = "faq" } = Astro.props;
+---
+
+<section class="section">
+  <div class="container-brand max-w-3xl">
+    {
+      (title || eyebrow) && (
+        <div class="mb-10">
+          {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
+          {title && <h2 class="font-display text-3xl sm:text-4xl">{title}</h2>}
+        </div>
+      )
+    }
+    <ul class="divide-y divide-[color:var(--color-border)] border-y border-[color:var(--color-border)]">
+      {
+        items.map((i, idx) => {
+          const id = `${idPrefix}-${i.id ?? idx + 1}`;
+          return (
+            <li>
+              <details class="group py-4" id={id}>
+                <summary class="list-none cursor-pointer flex items-center justify-between gap-4 font-display text-lg sm:text-xl">
+                  <span>{i.question}</span>
+                  <span
+                    class="inline-flex size-8 items-center justify-center rounded-full bg-[color:var(--color-plum-light)] text-[color:var(--color-plum)] transition-transform group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div class="prose-brand mt-3 text-[color:var(--color-text-secondary)]">
+                  <p>{i.answer}</p>
+                </div>
+              </details>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>

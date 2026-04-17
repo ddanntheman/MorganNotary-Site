@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Morgan Danner Notary social card">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5B2D82" />
+      <stop offset="100%" stop-color="#243B6E" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="980" cy="140" r="120" fill="#C8F53A" opacity="0.25" />
+  <text x="80" y="220" font-family="Georgia, serif" font-size="40" fill="#C8F53A" letter-spacing="4">MORGAN DANNER · NOTARY · RICHMOND, VA</text>
+  <text x="80" y="340" font-family="Georgia, serif" font-size="84" fill="#FAF9F6" font-weight="500">Good signatures.</text>
+  <text x="80" y="430" font-family="Georgia, serif" font-size="84" fill="#FAF9F6" font-weight="500">Better conversations.</text>
+  <text x="80" y="540" font-family="ui-monospace, monospace" font-size="24" fill="#FAF9F6" opacity="0.7">Licensed · Insured · NNA Member · (804) 215-6674</text>
+</svg>

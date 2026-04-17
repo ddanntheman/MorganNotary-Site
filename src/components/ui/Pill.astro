@@ -1,0 +1,21 @@
+---
+type Tone = "plum" | "emerald" | "navy" | "gold" | "neutral" | "charcoal";
+interface Props {
+  tone?: Tone;
+  class?: string;
+}
+const { tone = "plum", class: className = "" } = Astro.props;
+
+const tones: Record<Tone, string> = {
+  plum: "bg-[color:var(--color-plum-light)] text-[color:var(--color-plum)]",
+  emerald: "bg-[color:var(--color-emerald-light)] text-[color:var(--color-emerald)]",
+  navy: "bg-[color:var(--color-navy-light)] text-[color:var(--color-navy)]",
+  gold: "bg-[color:var(--color-gold-light)] text-[color:var(--color-gold)]",
+  neutral: "bg-[color:var(--color-warm-gray)] text-[color:var(--color-text-secondary)]",
+  charcoal: "bg-[color:var(--color-charcoal)] text-[color:var(--color-neon)]",
+};
+---
+
+<span class={`pill ${tones[tone]} ${className}`}>
+  <slot />
+</span>

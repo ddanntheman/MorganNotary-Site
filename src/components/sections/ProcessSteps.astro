@@ -1,0 +1,35 @@
+---
+interface Step {
+  step: number;
+  title: string;
+  detail: string;
+}
+interface Props {
+  steps: Step[];
+  heading?: string;
+  eyebrow?: string;
+}
+const { steps, heading, eyebrow } = Astro.props;
+---
+
+<section class="section-tight">
+  <div class="container-brand max-w-3xl">
+    {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
+    {heading && <h2 class="font-display text-3xl mb-8">{heading}</h2>}
+    <ol class="space-y-6">
+      {
+        steps.map((s) => (
+          <li class="grid grid-cols-[auto_1fr] gap-4">
+            <span class="inline-flex size-10 items-center justify-center rounded-full bg-[color:var(--color-plum)] text-white font-display text-lg">
+              {s.step}
+            </span>
+            <div>
+              <h3 class="font-display text-xl mb-1">{s.title}</h3>
+              <p class="text-[color:var(--color-text-secondary)]">{s.detail}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
