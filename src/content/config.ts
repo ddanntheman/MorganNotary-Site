@@ -21,6 +21,7 @@ const site = defineCollection({
   schema: z.object({
     pageType: z.enum(["home", "about", "pricing", "contact", "faq", "peoples-rate", "legal"]),
     seo: seoSchema,
+    greeting: z.string().optional(),
     h1: z.string(),
     subhead: z.string().optional(),
     heroImage: z.string().optional(),

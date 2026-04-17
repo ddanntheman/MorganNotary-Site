@@ -33,6 +33,7 @@ const jsonLd = [faqJsonLd(faqItems)];
 
 <BaseLayout meta={meta} jsonLd={jsonLd}>
   <Hero
+    greeting={homeData.greeting}
     h1={homeData.h1}
     subhead={homeData.subhead}
     ctaPrimary={homeData.ctaPrimary}
@@ -40,7 +41,7 @@ const jsonLd = [faqJsonLd(faqItems)];
     image={{
       src: "https://images.unsplash.com/photo-1584535250253-082add1cd727?auto=format&fit=crop&w=1200&q=80",
       alt: "Train trestle over the James River at golden hour in Richmond, Virginia",
-      caption: "Richmond-based. Mobile everywhere in the metro.",
+      caption: "Based in RVA. Mobile everywhere in the metro.",
       credit: "Photo, Derrick Brooks / Unsplash",
     }}
   />
@@ -61,6 +62,74 @@ const jsonLd = [faqJsonLd(faqItems)];
         <Icon name="lucide:map-pin" class="size-6 mx-auto mb-2 text-[color:var(--color-plum)]" />
         <p class="font-display text-xl">Mobile to You</p>
         <p class="eyebrow mt-1">Richmond metro · 50-mile radius</p>
+      </div>
+    </div>
+  </section>
+
+  {/* Warm "meet Morgan" intro. Photos are Unsplash placeholders;
+      swap with locally-shot Richmond + portrait photography when ready. */}
+  <section class="section">
+    <div class="container-brand grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
+      <div class="relative">
+        <div class="grid grid-cols-6 grid-rows-6 gap-3 aspect-[4/5] max-w-md mx-auto lg:mx-0">
+          <figure class="col-span-4 row-span-4 overflow-hidden rounded-[20px] border border-[color:var(--color-border-warm)] shadow-[0_20px_50px_rgba(28,26,24,0.10)]">
+            <img
+              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80"
+              alt="Warm notary-signing moment at a kitchen table"
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover"
+            />
+          </figure>
+          <figure class="col-span-3 row-span-3 col-start-4 row-start-4 overflow-hidden rounded-[16px] border border-[color:var(--color-border-warm)] shadow-[0_12px_32px_rgba(28,26,24,0.08)] bg-[color:var(--color-cream)]">
+            <img
+              src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=700&q=80"
+              alt="Richmond, Virginia row houses on a quiet tree-lined street"
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover"
+            />
+          </figure>
+          <figure class="col-span-2 row-span-2 col-start-1 row-start-5 overflow-hidden rounded-[14px] border border-[color:var(--color-border-warm)] bg-[color:var(--color-warm-white)]">
+            <img
+              src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=500&q=80"
+              alt="Fountain pen resting on signed paperwork"
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover"
+            />
+          </figure>
+        </div>
+        <p class="mt-4 text-center lg:text-left text-[11px] font-mono-brand uppercase tracking-widest text-[color:var(--color-text-tertiary)]">
+          Placeholder photography · Richmond shoot to come
+        </p>
+      </div>
+
+      <div class="space-y-5">
+        <p class="eyebrow eyebrow-terracotta">Meet Morgan</p>
+        <h2 class="font-display text-3xl sm:text-4xl leading-tight">
+          A neighbor who happens to be a notary.
+        </h2>
+        <p class="text-[color:var(--color-text-secondary)] text-lg leading-relaxed max-w-xl">
+          Signings feel less like paperwork and more like a porch-visit.
+          I'll meet you at your kitchen table, your office, a hospital room,
+          a coffee shop on Cary Street, wherever the document needs to be.
+          Witnesses, printing, a friendly pen, and plenty of patience,
+          all included.
+        </p>
+        <p class="text-[color:var(--color-text-secondary)] text-base max-w-xl">
+          Boutique by design. One notary, every time. No call center, no
+          queue, no upsell.
+        </p>
+        <div class="pt-2 flex items-center gap-4">
+          <span class="signature">— Morgan</span>
+          <a
+            href="/about"
+            class="text-sm font-medium text-[color:var(--color-plum)] no-underline hover:underline"
+          >
+            Read my story →
+          </a>
+        </div>
       </div>
     </div>
   </section>
