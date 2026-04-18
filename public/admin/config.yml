@@ -10,8 +10,11 @@ backend:
   name: github
   repo: ddanntheman/MorganNotary-Site
   branch: main
-  # Sveltia ships with built-in GitHub auth via its hosted service.
-  # No extra OAuth app setup required for the default flow.
+  # OAuth proxy lives in this same Vercel project at /api/auth + /api/callback.
+  # See api/auth.ts and api/callback.ts. Env vars required on Vercel:
+  # GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET (from the GitHub OAuth App).
+  base_url: https://morgannotary.com
+  auth_endpoint: api/auth
   commit_messages:
     create: "CMS: create {{collection}} '{{slug}}'"
     update: "CMS: update {{collection}} '{{slug}}'"
